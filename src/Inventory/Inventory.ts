@@ -1,8 +1,8 @@
 //delete this types
 
-type Book={
-    text: string
-}
+// type Book={
+//     text: string
+// }
 
 //Receipt como objeto: factura
 type Receipt={
