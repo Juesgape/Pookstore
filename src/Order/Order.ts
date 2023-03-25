@@ -1,4 +1,4 @@
-class Order{
+export class Order{
     constructor(
     private buyer:{},
     private book:{},

@@ -3,10 +3,12 @@ class GetBooks{
 
 
 
-    getData(){
+    public getData(){
 
     }
 
 
-    createBook(){}
+    public createBook(){
+        
+    }
 }

@@ -1,4 +1,4 @@
-import { User } from "../user/User";
+import { User } from "../User/User";
 
 class Login {
   constructor(
@@ -9,7 +9,7 @@ class Login {
     ) {
 
   }
-  createUser() {
+  public createUser() {
     const user = new User(this.email, this.name)
   }
 }
