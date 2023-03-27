@@ -1,0 +1,8 @@
+.likes-container {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  backdrop-filter: blur(5px);
+}
+
+

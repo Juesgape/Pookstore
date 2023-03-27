@@ -8,6 +8,7 @@ class Login {
     }
     createUser() {
         const user = new User(this.email, this.name, this.type);
+        return user;
     }
 }
 //This was just to test that it worked

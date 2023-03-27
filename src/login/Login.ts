@@ -11,6 +11,7 @@ class Login {
   }
   public createUser() {
     const user = new User(this.email, this.name, this.type)
+    return user
   }
 }
 
