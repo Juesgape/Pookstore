@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Login = void 0;
-const User_1 = require("../user/User");
+const User_1 = require("../User/User");
 class Login {
     constructor(name, email, password, type) {
         this.name = name;

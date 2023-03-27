@@ -5,5 +5,6 @@ class GetBooks {
     }
     getData() {
     }
-    createBook() { }
+    createBook() {
+    }
 }
