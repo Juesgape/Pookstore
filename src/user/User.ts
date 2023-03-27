@@ -4,7 +4,7 @@ class User {
   constructor(
     private email: string,
     private userName: string,
-    private type: string
+    private type: string,
     ) {
 
   }

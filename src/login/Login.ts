@@ -1,6 +1,6 @@
 import { User } from "../User/User.js";
 
-export class Login {
+class Login {
   constructor(
     private name: string,
     private email: string,
@@ -9,9 +9,8 @@ export class Login {
     ) {
 
   }
-  createUser() {
+  public createUser() {
     const user = new User(this.email, this.name, this.type)
-    user.getUserInfo()
   }
 }
 
@@ -19,3 +18,7 @@ export class Login {
 /* const login = new Login('Juan', 'Juan@pppp', '12344', 'cliente')
 
 login.createUser() */
+
+export {
+  Login
+}

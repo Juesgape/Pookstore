@@ -1,4 +1,4 @@
-export class User {
+class User {
     constructor(email, userName, type) {
         this.email = email;
         this.userName = userName;
@@ -9,3 +9,4 @@ export class User {
         console.log(`Email: ${this.email}, Username: ${this.userName}, Type: ${this.type}, Likes: ${this.likes}`);
     }
 }
+export { User };
