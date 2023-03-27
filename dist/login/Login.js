@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Login = void 0;
-const User_1 = require("../User/User");
+import { User } from "../User/User.js";
 class Login {
     constructor(name, email, password, type) {
         this.name = name;
@@ -10,7 +7,11 @@ class Login {
         this.type = type;
     }
     createUser() {
-        const user = new User_1.User(this.email, this.name);
+        const user = new User(this.email, this.name, this.type);
     }
 }
-exports.Login = Login;
+//This was just to test that it worked
+/* const login = new Login('Juan', 'Juan@pppp', '12344', 'cliente')
+
+login.createUser() */
+export { Login };
