@@ -1,4 +1,4 @@
-import {User} from "./User"
+import {User} from "./User.js"
 
 class Client extends User{
   private likes: string[] = []
@@ -9,4 +9,8 @@ class Client extends User{
   getUserLikes() {
     console.log(`Likes: ${this.likes}`)
   }
+}
+
+export {
+  Client
 }

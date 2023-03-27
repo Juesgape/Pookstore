@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "./User.js";
 class Client extends User {
     constructor(email, username, type) {
         super(email, username, type);
@@ -8,3 +8,4 @@ class Client extends User {
         console.log(`Likes: ${this.likes}`);
     }
 }
+export { Client };

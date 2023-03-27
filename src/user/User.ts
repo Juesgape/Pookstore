@@ -1,8 +1,8 @@
 class User {
   constructor(
-    private email: string,
-    private userName: string,
-    private type: string,
+    public email: string,
+    public userName: string,
+    public type: string,
     ) {
 
   }
