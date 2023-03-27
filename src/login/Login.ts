@@ -1,6 +1,6 @@
-import { User } from "../user/User";
+import { User } from "../User/User.js";
 
-class Login {
+export class Login {
   constructor(
     private name: string,
     private email: string,
@@ -10,10 +10,12 @@ class Login {
 
   }
   createUser() {
-    const user = new User(this.email, this.name)
+    const user = new User(this.email, this.name, this.type)
+    user.getUserInfo()
   }
 }
 
-export {
-  Login
-}
+//This was just to test that it worked
+/* const login = new Login('Juan', 'Juan@pppp', '12344', 'cliente')
+
+login.createUser() */

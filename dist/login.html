@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PookStore/login</title>
+  <link rel="stylesheet" href="../css/loginInterface/login.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <form>
+      <h2>Login</h2>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <div class="radio-container">
+        <label>Are you a:</label>
+        <input type="radio" id="customer" name="user-type" value="customer" checked>
+        <label for="customer">Customer</label>
+        <input type="radio" id="worker" name="user-type" value="worker">
+        <label for="worker">Worker</label>
+      </div>
+
+      <div class="span-container">
+        <span>Please dont fill out this form seriously with actual information</span>
+      </div>
+
+      <div class="login-button-container">
+        <input type="button" id="submit" value="Login">
+      </div>
+
+    </form>
+  </div>
+
+  <script type="module" src="./index.js"></script>
+</body>
+</html>
