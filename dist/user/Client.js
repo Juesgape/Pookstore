@@ -1,11 +1,17 @@
 import { User } from "./User.js";
 class Client extends User {
-    constructor(email, username, type) {
-        super(email, username, type);
-        this.likes = [];
+    _likes = [];
+    constructor(email, userName, type) {
+        super(email, userName, type);
     }
-    getUserLikes() {
-        console.log(`Likes: ${this.likes}`);
+    get getName() {
+        return this.userName;
+    }
+    get getUserLikes() {
+        return this._likes;
+    }
+    set setLikes(value) {
+        this._likes = value;
     }
 }
 export { Client };

@@ -1,15 +1,20 @@
 import { LocalData } from './LocalData/LocalData.js';
 import { Client } from './User/Client.js';
+import { GetBooks } from './Getbooks/Getbooks.js';
+const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
 let user = new Client(userData.email, userData.userName, userData.type);
+let userNameDisplay = user.getName;
+userName.innerHTML = userNameDisplay;
+const likesContainer = document.querySelector('.likes-container');
 const buttonsLikes = Array.from(document.querySelectorAll('.btn'));
+const sendLikesBtn = document.querySelector('#send-likes-btn');
 //how many books have they reacted to?
 let elementsSelected = [];
 buttonsLikes.forEach(button => {
     button.addEventListener('click', () => {
-        var _a;
-        const buttonText = (_a = button.textContent) === null || _a === void 0 ? void 0 : _a.trim();
+        const buttonText = button.textContent?.trim();
         if (button.getAttribute('id') === 'btn-selected') {
             button.removeAttribute('id');
             const index = elementsSelected.indexOf(buttonText);
@@ -28,4 +33,18 @@ buttonsLikes.forEach(button => {
             }
         }
     });
+});
+//send likes button
+sendLikesBtn?.addEventListener('click', () => {
+    if (elementsSelected.length < 3) {
+        console.warn('You must select at least more than 2 books');
+    }
+    else {
+        user.setLikes = elementsSelected;
+        console.log(user.getUserLikes);
+        likesContainer?.classList.add('hide');
+        let scrapingBooks = new GetBooks();
+        scrapingBooks.getFavoriteLinks(user.getUserLikes);
+        /* scrapingBooks.getData() */
+    }
 });

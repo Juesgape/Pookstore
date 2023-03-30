@@ -1,5 +1,9 @@
 import { User } from "../User/User.js";
 class Login {
+    name;
+    email;
+    password;
+    type;
     constructor(name, email, password, type) {
         this.name = name;
         this.email = email;

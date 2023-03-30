@@ -1,4 +1,7 @@
 class User {
+    email;
+    userName;
+    type;
     constructor(email, userName, type) {
         this.email = email;
         this.userName = userName;

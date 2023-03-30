@@ -11,9 +11,11 @@
 .blur-background {
   max-width: 800px;
 }
-
+.hide {
+  display: none;
+}
 .likes-title h2 {
-  font-size: 5rem;
+  font-size: 4rem;
   margin-bottom: 20px;
   text-align: center;
   color: #333;
@@ -64,4 +66,20 @@
 #btn-selected {
   transition: .3s ease-in-out;
   background-color: #212121;
+}
+
+.send-container {
+  text-align: center;
+}
+
+.send-container button {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  width: 300px;
+  font-weight: bold;
+  height: 40px;
+}
+.send-container button:hover {
+  background-color: rgb(199, 190, 190);
 }

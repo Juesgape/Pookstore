@@ -1,11 +1,9 @@
 "use strict";
 //delete this types
 class Inventory {
-    constructor() {
-        this.totalbooks = 0;
-        this.books = [];
-        this.soldbooksRegister = [];
-    }
+    totalbooks = 0;
+    books = [];
+    soldbooksRegister = [];
     //GETTERS
     get_totalbooks() {
         console.log(this.totalbooks);
@@ -27,7 +25,7 @@ class Inventory {
         console.log("Libros agregados con Exito");
     }
     removeBook(delete_books) {
-        this.totalbooks -= delete_books.length; //maybe. 
+        this.totalbooks -= delete_books.length; //maybe.
         for (let i = 0; i < delete_books.length; i++) {
             this.books = this.books.filter(e => e !== delete_books[i]); //Puede que funcione. Supongo que lo borra si encuentra exactamente el mismo objeto, porque o si no se borrarían libros que no se deben borrar
         }

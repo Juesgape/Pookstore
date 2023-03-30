@@ -1,5 +1,12 @@
 "use strict";
 class Book {
+    id;
+    title;
+    author;
+    genre;
+    price;
+    supplier;
+    stock;
     constructor(id, title, author, genre, price, supplier, stock) {
         this.id = id;
         this.title = title;

@@ -24,7 +24,7 @@
   <section class="likes-container">
     <div class="blur-background">
       <div class="likes-title">
-        <h2>Hola <span>Juan</span>!</h2>
+        <h2>Hola <span class="userName"></span>!</h2>
       </div>
       <div class="likes-info">
         <span>Selecciona tus géneros favoritos para así hacer las mejores recomendaciones para ti</span>
@@ -32,7 +32,7 @@
 
       <div class="likes-btns-container">
         <div class="btn">
-          <button>Misterio y suspenso</button>
+          <button>Mystery thriller</button>
         </div>
         <div class="btn">
           <button>Ficción histórica</button>
@@ -80,7 +80,10 @@
           <button>Niños</button>
         </div>
       </div>
+    </div>
 
+    <div class="send-container">
+      <button id="send-likes-btn">Enviar</button>
     </div>
   </section>
 
@@ -203,6 +206,7 @@
       </div>
     </footer>
 
+    <script type="module" src="./dist/puppeteer.js"></script>
     <script type="module" src="./dist/selectFav.js"></script>
 
 </body>

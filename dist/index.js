@@ -1,6 +1,6 @@
 import { Login } from './Login/Login.js';
 const loginButton = document.querySelector('#submit');
-loginButton === null || loginButton === void 0 ? void 0 : loginButton.addEventListener('click', makeLogin);
+loginButton?.addEventListener('click', makeLogin);
 function makeLogin() {
     const userName = document.getElementById('username').value;
     const email = document.querySelector('#email').value;

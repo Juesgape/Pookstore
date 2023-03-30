@@ -5,9 +5,8 @@
 // }
 
 //Receipt como objeto: factura
-type Receipt={
+type Receipt = {
     text: string[]
-
 }
 
 
@@ -24,13 +23,13 @@ class Inventory{
    public get_books():void{
         for(let i:number=0;i < this.books.length;i++){
             console.log(this.books[i]);
-            
+
         }
     }
     public get_soldbooksRegister():void{
         for(let i:number=0;i < this.soldbooksRegister.length;i++){
             console.log(this.soldbooksRegister[i]);
-            
+
         }
     }
     //METHODS
@@ -42,7 +41,7 @@ class Inventory{
     }
 
     public removeBook(delete_books:[]){
-        this.totalbooks-=delete_books.length //maybe. 
+        this.totalbooks-=delete_books.length //maybe.
         for(let i:number=0;i<delete_books.length;i++){
             this.books=this.books.filter(e => e !== delete_books[i])//Puede que funcione. Supongo que lo borra si encuentra exactamente el mismo objeto, porque o si no se borrarían libros que no se deben borrar
         }

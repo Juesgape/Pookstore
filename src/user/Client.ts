@@ -1,13 +1,19 @@
 import {User} from "./User.js"
 
 class Client extends User{
-  private likes: string[] = []
+  private _likes: string[] = []
 
-  constructor(email: string,username: string, type: string){
-      super(email, username, type)
+  constructor(email: string, userName: string, type: string){
+      super(email, userName, type)
   }
-  getUserLikes() {
-    console.log(`Likes: ${this.likes}`)
+  public get getName() {
+    return this.userName
+  }
+  public get getUserLikes() {
+    return this._likes
+  }
+  public set setLikes(value: string[]) {
+    this._likes = value
   }
 }
 

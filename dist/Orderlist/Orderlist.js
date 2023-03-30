@@ -1,4 +1,6 @@
 class Orderlist {
+    orders;
+    totalOrderList;
     constructor(orders, totalOrderList) {
         this.orders = orders;
         this.totalOrderList = totalOrderList;
