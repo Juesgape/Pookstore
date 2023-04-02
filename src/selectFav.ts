@@ -1,12 +1,12 @@
+import { GetBooks } from './Getbooks/Getbooks.js'
 import {LocalData} from './LocalData/LocalData.js'
 import {Client} from './User/Client.js'
-import {GetBooks} from './Getbooks/Getbooks.js'
 
 const userName = document.querySelector('.userName') as HTMLElement
 
 let localInfo = new LocalData()
 let userData = localInfo.getUser()
-let user = new Client(userData.email, userData.userName, userData.type)
+export let user = new Client(userData.email, userData.userName, userData.type)
 let userNameDisplay:string = user.getName
 
 userName.innerHTML = userNameDisplay
@@ -41,7 +41,7 @@ buttonsLikes.forEach(button => {
 })
 
 //send likes button
-sendLikesBtn?.addEventListener('click', () => {
+sendLikesBtn?.addEventListener('click', async () => {
 
   if(elementsSelected.length < 3) {
     console.warn('You must select at least more than 2 books')
@@ -50,8 +50,7 @@ sendLikesBtn?.addEventListener('click', () => {
     console.log(user.getUserLikes);
     likesContainer?.classList.add('hide')
 
-    let scrapingBooks = new GetBooks()
-    scrapingBooks.getFavoriteLinks(user.getUserLikes)
-    /* scrapingBooks.getData() */
+    let getBooks = new GetBooks()
+    getBooks.getBooksAPI()
   }
 })

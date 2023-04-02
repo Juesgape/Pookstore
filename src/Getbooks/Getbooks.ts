@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer"
+/* import * as puppeteer from "puppeteer" */
 
 class GetBooks {
   constructor(
@@ -45,7 +45,7 @@ class GetBooks {
         console.log('User likes', this._userFavGenresLinks);
     }
 
-    public async getData() {
+    /* public async getData() {
 
       console.log('Starting the extraction');
       //getting started with puppeteer
@@ -61,10 +61,13 @@ class GetBooks {
 
           //get all the books elements availables in the page and get their links
           const bookLinks = await page.$$eval('.js-tooltipTrigger .pollAnswer__bookLink', links =>
-              links.map(link => link.getAttribute('href'))
+              links.map(link => (link as HTMLAnchorElement).href)
           );
 
           console.log(`Found ${bookLinks.length} books on page`);
+
+          console.log(`This are the bookLinks selected ${bookLinks}`);
+
 
           //Loop through all the books links and get their information
           for (let j = 0; j < bookLinks.length; j++) {
@@ -98,7 +101,7 @@ class GetBooks {
                     genre: bookGenre ? bookGenre[0].textContent : ''
                 }
             });
-            console.log(`An author name was found = "${bookData}"`);
+            console.log(`An author name was found = "${bookData.author}"`);
             data.push(bookData);
             await bookPage.close();
             await page.waitForTimeout(1000);
@@ -107,10 +110,85 @@ class GetBooks {
   }
       console.log(data);
       await browser.close();
+
+      return data //scraped data
+    } */
+
+    public showBooks(books: any[]) {
+      const bookContainer = document.querySelector('.book-container') as HTMLElement;
+
+      // Clear previous book data
+      bookContainer.innerHTML = '';
+
+      // Loop through each book and create a card for it
+      books.forEach((book) => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+
+        const bookTitle = document.createElement('h3');
+        bookTitle.classList.add('book-title');
+        bookTitle.textContent = book.title;
+        bookCard.appendChild(bookTitle);
+
+        const bookImg = document.createElement('img');
+        bookImg.src = book.img;
+        bookImg.alt = book.title + ' cover';
+        bookCard.appendChild(bookImg);
+
+        const bookAuthor = document.createElement('p');
+        bookAuthor.classList.add('book-author');
+        bookAuthor.textContent = 'By: ' + book.author;
+        bookCard.appendChild(bookAuthor);
+
+        const bookPrice = document.createElement('p');
+        bookPrice.classList.add('book-price');
+        bookPrice.textContent = '$' + Math.floor(Math.random() * 500000).toLocaleString();
+        bookCard.appendChild(bookPrice);
+
+        const bookButtons = document.createElement('div');
+        bookButtons.classList.add('book-buttons');
+
+        const buyButton = document.createElement('button');
+        buyButton.classList.add('buy-button');
+        buyButton.textContent = 'Buy';
+        bookButtons.appendChild(buyButton);
+
+        const cartButton = document.createElement('button');
+        cartButton.classList.add('cart-button');
+        cartButton.textContent = 'Add to Cart';
+        bookButtons.appendChild(cartButton);
+
+        bookCard.appendChild(bookButtons);
+
+        bookContainer.appendChild(bookCard);
+      });
     }
 
-    public createBook(){
+    public getBooksAPI(){
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '2cdf4011bdmsh573d001fd6a6495p1785d3jsn658b5e2b4e46',
+          'X-RapidAPI-Host': 'hapi-books.p.rapidapi.com'
+        }
+      };
 
+      fetch('https://hapi-books.p.rapidapi.com/nominees/fantasy/2020', options)
+        .then(response => response.json())
+        .then(response => {
+          const books = response.map((e:any) => {
+            return {
+              id: e.book_id,
+              title: e.name,
+              author: e.author,
+              img: e.cover
+            }
+          })
+
+          this.showBooks(books)
+
+        })
+        .catch(err => console.error(err));
     }
 }
 
