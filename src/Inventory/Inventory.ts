@@ -1,3 +1,5 @@
+import { Book } from "../Book/Book.js"
+
 //delete this types
 
 // type Book={
@@ -11,39 +13,50 @@ type Receipt = {
 
 
 class Inventory{
-    private totalbooks:number=0
-    private books: Book[]=[]
-    private soldbooksRegister:Receipt[]=[]
+    private _totalbooks:number = 0
+    private _books: Book[]=[]
+    private _soldbooksRegister:Receipt[]=[]
 
     //GETTERS
-   public get_totalbooks():void{
-        console.log(this.totalbooks)
+    public get totalbooks():number {
+        return this._totalbooks
     }
 
-   public get_books():void{
-        for(let i:number=0;i < this.books.length;i++){
-            console.log(this.books[i]);
-
-        }
+    public get books(): Book[]{
+        return this._books
     }
+
+    //SETTERS
+
+    public set setTotalBooks(value: number) {
+      this._totalbooks = value
+    }
+
+    public set setBooks(book: Book) {
+      this._books.push(book)
+
+      //updating the total books in the inventory
+      this.setTotalBooks = this._books.length
+    }
+
     public get_soldbooksRegister():void{
-        for(let i:number=0;i < this.soldbooksRegister.length;i++){
-            console.log(this.soldbooksRegister[i]);
+        for(let i:number=0;i < this._soldbooksRegister.length;i++){
+            console.log(this._soldbooksRegister[i]);
 
         }
     }
     //METHODS
     public updateTotalBooks(new_books:[]):void{
-        this.totalbooks+=new_books.length //El numero de libros aumentará segun la cantidad de libros que se ingresan en el array
+        this._totalbooks+=new_books.length //El numero de libros aumentará segun la cantidad de libros que se ingresan en el array
 
-        this.books=[...this.books, ...new_books]//Add values of new_books array
+        this._books=[...this._books, ...new_books]//Add values of new_books array
         console.log("Libros agregados con Exito")
     }
 
     public removeBook(delete_books:[]){
-        this.totalbooks-=delete_books.length //maybe.
+        this._totalbooks -= delete_books.length //maybe.
         for(let i:number=0;i<delete_books.length;i++){
-            this.books=this.books.filter(e => e !== delete_books[i])//Puede que funcione. Supongo que lo borra si encuentra exactamente el mismo objeto, porque o si no se borrarían libros que no se deben borrar
+            this._books=this._books.filter(e => e !== delete_books[i])//Puede que funcione. Supongo que lo borra si encuentra exactamente el mismo objeto, porque o si no se borrarían libros que no se deben borrar
         }
         console.log("Los libros han sido removidos del inventario...")
     }
@@ -52,7 +65,11 @@ class Inventory{
 
 const store_inventory= new Inventory()
 //testing the getters
-store_inventory.get_totalbooks()
-store_inventory.get_books()
-store_inventory.get_soldbooksRegister()
+store_inventory.totalbooks //You call a setter like this
+/* store_inventory.get_books()
+store_inventory.get_soldbooksRegister() */
+
+export {
+  store_inventory
+}
 

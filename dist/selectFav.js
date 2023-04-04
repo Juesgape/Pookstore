@@ -1,6 +1,7 @@
 import { GetBooks } from './Getbooks/Getbooks.js';
 import { LocalData } from './LocalData/LocalData.js';
 import { Client } from './User/Client.js';
+import { store_inventory } from './Inventory/Inventory.js';
 const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
@@ -44,6 +45,48 @@ sendLikesBtn?.addEventListener('click', async () => {
         console.log(user.getUserLikes);
         likesContainer?.classList.add('hide');
         let getBooks = new GetBooks();
-        getBooks.getBooksAPI();
+        getBooks.getData();
+        setTimeout(() => {
+            showBooks(store_inventory.books);
+        }, 2000);
     }
 });
+//Showing books
+const showBooks = (books) => {
+    const bookContainer = document.querySelector('.book-container');
+    // Clear previous book data
+    bookContainer.innerHTML = '';
+    // Loop through each book and create a card for it
+    books.forEach((book) => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        const bookTitle = document.createElement('h3');
+        bookTitle.classList.add('book-title');
+        bookTitle.textContent = book.title;
+        bookCard.appendChild(bookTitle);
+        const bookImg = document.createElement('img');
+        bookImg.src = book.img;
+        bookImg.alt = book.title + ' cover';
+        bookCard.appendChild(bookImg);
+        const bookAuthor = document.createElement('p');
+        bookAuthor.classList.add('book-author');
+        bookAuthor.textContent = 'By: ' + book.author;
+        bookCard.appendChild(bookAuthor);
+        const bookPrice = document.createElement('p');
+        bookPrice.classList.add('book-price');
+        bookPrice.textContent = '$' + Math.floor(Math.random() * 500000).toLocaleString();
+        bookCard.appendChild(bookPrice);
+        const bookButtons = document.createElement('div');
+        bookButtons.classList.add('book-buttons');
+        const buyButton = document.createElement('button');
+        buyButton.classList.add('buy-button');
+        buyButton.textContent = 'Buy';
+        bookButtons.appendChild(buyButton);
+        const cartButton = document.createElement('button');
+        cartButton.classList.add('cart-button');
+        cartButton.textContent = 'Add to Cart';
+        bookButtons.appendChild(cartButton);
+        bookCard.appendChild(bookButtons);
+        bookContainer.appendChild(bookCard);
+    });
+};

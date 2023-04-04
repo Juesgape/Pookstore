@@ -1,19 +1,44 @@
-"use strict";
 class Book {
-    id;
-    title;
-    author;
-    genre;
-    price;
-    supplier;
-    stock;
-    constructor(id, title, author, genre, price, supplier, stock) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.price = price;
-        this.supplier = supplier;
-        this.stock = stock;
+    _id;
+    _title;
+    _author;
+    _description;
+    _img;
+    _genre;
+    _price;
+    _supplier;
+    _stock;
+    constructor(_id, _title, _author, _description, _img, _genre, _price, _supplier, _stock) {
+        this._id = _id;
+        this._title = _title;
+        this._author = _author;
+        this._description = _description;
+        this._img = _img;
+        this._genre = _genre;
+        this._price = _price;
+        this._supplier = _supplier;
+        this._stock = _stock;
+    }
+    get title() {
+        return this._title;
+    }
+    get author() {
+        return this._author;
+    }
+    get description() {
+        return this._description;
+    }
+    get img() {
+        return this._img;
+    }
+    get genre() {
+        return this._genre;
+    }
+    get price() {
+        return this._price;
+    }
+    get stock() {
+        return this._stock;
     }
 }
+export { Book };
