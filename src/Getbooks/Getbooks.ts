@@ -3,6 +3,7 @@ import { Book } from "../Book/Book.js"
 import { store_inventory } from "../Inventory/Inventory.js"
 import { createBookCategory } from "../selectFav.js"
 import { showBooks } from "../selectFav.js"
+import { user } from "../selectFav.js"
 
 class GetBooks {
   constructor(
@@ -30,40 +31,39 @@ class GetBooks {
 
   ) {}
 
-      public set booksAPI( newBooks:Object ) {
-        this._booksAPI = newBooks
-      }
-
+      //GETTERS
       public get booksAPI() {
         return `This is the main book Object ${this._booksAPI}`
       }
 
-      public getFavoriteLinks(userLikes: string[]): void {
+      public get urls() {
+        return this._urls
+      }
 
-        let toLowerGenres: string[] = userLikes.map(e => {
-          e = e.toLowerCase()
-          e = e.replace(" ", "-")
-          return e
-        })
+      //SETTERS
+      public set booksAPI( newBooks:Object ) {
+        this._booksAPI = newBooks
+      }
 
-        for(let i = 0; i < toLowerGenres.length; i++) {
-          //create new array with the urls that match the user's likes
-          let newVersion = this._urls.filter(element => element.includes(toLowerGenres[i]))
 
-          newVersion.forEach(e => {
-            /* console.log('Element', e); */
-            this._userFavGenresLinks.push(e)
-            })
+      /* public getFavoriteLinks(userLikes: string[]): void {
 
-        }
-        console.log('User likes', this._userFavGenresLinks);
-    }
+
+
+    } */
 
     public createBook(books: Object) {
       let id = 1
+      let userFavLinks = user.getUserLikes
 
       for (const key in books) {
         if(books.hasOwnProperty(key)) {
+
+          //Checking if the genre is what the user wants
+          if(!userFavLinks.includes(key)) {
+            continue
+          }
+
           const bookArray = books[key] // I honestly dont know what to do with this XDXD
           //this will create a new category in the index HTML code
           createBookCategory(key)

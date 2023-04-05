@@ -3,6 +3,7 @@ import { Book } from "../Book/Book.js";
 import { store_inventory } from "../Inventory/Inventory.js";
 import { createBookCategory } from "../selectFav.js";
 import { showBooks } from "../selectFav.js";
+import { user } from "../selectFav.js";
 class GetBooks {
     _urls;
     _userFavGenresLinks;
@@ -29,32 +30,31 @@ class GetBooks {
         this._userFavGenresLinks = _userFavGenresLinks;
         this._booksAPI = _booksAPI;
     }
-    set booksAPI(newBooks) {
-        this._booksAPI = newBooks;
-    }
+    //GETTERS
     get booksAPI() {
         return `This is the main book Object ${this._booksAPI}`;
     }
-    getFavoriteLinks(userLikes) {
-        let toLowerGenres = userLikes.map(e => {
-            e = e.toLowerCase();
-            e = e.replace(" ", "-");
-            return e;
-        });
-        for (let i = 0; i < toLowerGenres.length; i++) {
-            //create new array with the urls that match the user's likes
-            let newVersion = this._urls.filter(element => element.includes(toLowerGenres[i]));
-            newVersion.forEach(e => {
-                /* console.log('Element', e); */
-                this._userFavGenresLinks.push(e);
-            });
-        }
-        console.log('User likes', this._userFavGenresLinks);
+    get urls() {
+        return this._urls;
     }
+    //SETTERS
+    set booksAPI(newBooks) {
+        this._booksAPI = newBooks;
+    }
+    /* public getFavoriteLinks(userLikes: string[]): void {
+
+
+
+  } */
     createBook(books) {
         let id = 1;
+        let userFavLinks = user.getUserLikes;
         for (const key in books) {
             if (books.hasOwnProperty(key)) {
+                //Checking if the genre is what the user wants
+                if (!userFavLinks.includes(key)) {
+                    continue;
+                }
                 const bookArray = books[key]; // I honestly dont know what to do with this XDXD
                 //this will create a new category in the index HTML code
                 createBookCategory(key);
