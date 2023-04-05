@@ -41,18 +41,23 @@ class GetBooks {
     set booksAPI(newBooks) {
         this._booksAPI = newBooks;
     }
-    /* public getFavoriteLinks(userLikes: string[]): void {
-
-
-
-  } */
+    firstWord(genre) {
+        const result = [];
+        for (let i = 0; i < genre.length; i++) {
+            const words = genre[i].split(' ');
+            result.push(words[0]);
+        }
+        return result;
+    }
     createBook(books) {
         let id = 1;
-        let userFavLinks = user.getUserLikes;
+        let userFavLinks = this.firstWord(user.getUserLikes);
+        console.log(userFavLinks);
         for (const key in books) {
             if (books.hasOwnProperty(key)) {
                 //Checking if the genre is what the user wants
                 if (!userFavLinks.includes(key)) {
+                    console.log(`Does not include ${key}`);
                     continue;
                 }
                 const bookArray = books[key]; // I honestly dont know what to do with this XDXD

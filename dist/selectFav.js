@@ -1,6 +1,7 @@
 import { GetBooks } from './Getbooks/Getbooks.js';
 import { LocalData } from './LocalData/LocalData.js';
 import { Client } from './User/Client.js';
+import { getBackToBooks } from './Animation/bookInfo.js';
 const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
@@ -90,15 +91,25 @@ export const showBooks = (books, genre) => {
         bookCard.appendChild(bookPrice);
         const bookButtons = document.createElement('div');
         bookButtons.classList.add('book-buttons');
-        const buyButton = document.createElement('button');
-        buyButton.classList.add('buy-button');
-        buyButton.textContent = 'Buy';
-        bookButtons.appendChild(buyButton);
+        const moreInfoButton = document.createElement('button');
+        moreInfoButton.classList.add('buy-button');
+        moreInfoButton.textContent = 'View more info';
+        bookButtons.appendChild(moreInfoButton);
         const cartButton = document.createElement('button');
         cartButton.classList.add('cart-button');
         cartButton.textContent = 'Add to Cart';
         bookButtons.appendChild(cartButton);
         bookCard.appendChild(bookButtons);
         bookContainer.appendChild(bookCard);
+        //ading eveent listener to the books
+        moreInfoButton.addEventListener('click', () => {
+            let bookInfoContainer = document.querySelector('.book-info-container');
+            bookInfoContainer?.classList.remove('hide');
+            let mainContainer = document.querySelector('.main-container');
+            let header = window.parent.document.querySelector('header');
+            header.classList.add('blur');
+            mainContainer.classList.add('blur');
+            getBackToBooks(book);
+        });
     });
 };

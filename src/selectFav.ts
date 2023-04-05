@@ -4,6 +4,8 @@ import {Client} from './User/Client.js'
 import { Book } from './Book/Book.js'
 import { store_inventory } from './Inventory/Inventory.js'
 
+import { getBackToBooks, bookInfo } from './Animation/bookInfo.js'
+
 const userName = document.querySelector('.userName') as HTMLElement
 
 let localInfo = new LocalData()
@@ -116,10 +118,10 @@ export const showBooks = (books: Book[], genre: string) => {
         const bookButtons = document.createElement('div');
         bookButtons.classList.add('book-buttons');
 
-        const buyButton = document.createElement('button');
-        buyButton.classList.add('buy-button');
-        buyButton.textContent = 'Buy';
-        bookButtons.appendChild(buyButton);
+        const moreInfoButton = document.createElement('button');
+        moreInfoButton.classList.add('buy-button');
+        moreInfoButton.textContent = 'View more info';
+        bookButtons.appendChild(moreInfoButton);
 
         const cartButton = document.createElement('button');
         cartButton.classList.add('cart-button');
@@ -129,5 +131,20 @@ export const showBooks = (books: Book[], genre: string) => {
         bookCard.appendChild(bookButtons);
 
         bookContainer.appendChild(bookCard);
+
+        //ading eveent listener to the books
+        moreInfoButton.addEventListener('click', () => {
+          let bookInfoContainer = document.querySelector('.book-info-container') as HTMLElement
+          bookInfoContainer?.classList.remove('hide')
+
+          let mainContainer = document.querySelector('.main-container') as HTMLElement
+          let header = window.parent.document.querySelector('header') as HTMLElement
+          header.classList.add('blur')
+          mainContainer.classList.add('blur')
+
+          getBackToBooks(book)
+        })
       });
+
+
 }

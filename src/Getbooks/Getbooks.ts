@@ -46,21 +46,28 @@ class GetBooks {
       }
 
 
-      /* public getFavoriteLinks(userLikes: string[]): void {
-
-
-
-    } */
+      public firstWord(genre: string[]): string[] {
+        const result = [];
+        for (let i = 0; i < genre.length; i++) {
+          const words = genre[i].split(' ');
+          result.push(words[0]);
+        }
+        return result;
+      }
 
     public createBook(books: Object) {
       let id = 1
-      let userFavLinks = user.getUserLikes
+      let userFavLinks = this.firstWord(user.getUserLikes)
+      console.log(userFavLinks);
+
 
       for (const key in books) {
         if(books.hasOwnProperty(key)) {
 
           //Checking if the genre is what the user wants
           if(!userFavLinks.includes(key)) {
+            console.log(`Does not include ${key}`);
+
             continue
           }
 
