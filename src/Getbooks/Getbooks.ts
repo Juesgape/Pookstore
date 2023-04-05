@@ -1,6 +1,8 @@
 /* import * as puppeteer from "puppeteer" */
 import { Book } from "../Book/Book.js"
 import { store_inventory } from "../Inventory/Inventory.js"
+import { createBookCategory } from "../selectFav.js"
+import { showBooks } from "../selectFav.js"
 
 class GetBooks {
   constructor(
@@ -63,6 +65,11 @@ class GetBooks {
       for (const key in books) {
         if(books.hasOwnProperty(key)) {
           const bookArray = books[key] // I honestly dont know what to do with this XDXD
+          //this will create a new category in the index HTML code
+          createBookCategory(key)
+
+          //This will store all of our books by genre so that we can show them later on in out application
+          let totalBooksByGenre: Book[] = []
 
           for(const book of bookArray) {
             const genre: string = key
@@ -73,8 +80,11 @@ class GetBooks {
 
             //sending books to inventory
             store_inventory.setBooks = newBook
+            //sending temporaly books to the array
+            totalBooksByGenre.push(newBook)
             id += 1
           }
+          showBooks(totalBooksByGenre, key)
         }
       }
 

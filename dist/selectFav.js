@@ -1,7 +1,6 @@
 import { GetBooks } from './Getbooks/Getbooks.js';
 import { LocalData } from './LocalData/LocalData.js';
 import { Client } from './User/Client.js';
-import { store_inventory } from './Inventory/Inventory.js';
 const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
@@ -46,14 +45,27 @@ sendLikesBtn?.addEventListener('click', async () => {
         likesContainer?.classList.add('hide');
         let getBooks = new GetBooks();
         getBooks.getData();
-        setTimeout(() => {
-            showBooks(store_inventory.books);
-        }, 2000);
     }
 });
 //Showing books
-const showBooks = (books) => {
-    const bookContainer = document.querySelector('.book-container');
+export const createBookCategory = (category) => {
+    const bookSection = document.querySelector('.book-section');
+    let divCategory = document.createElement('div');
+    divCategory.innerHTML = `
+  <div class="category">
+  <div class="category-name">
+    <h3 class="category-title">${category}</h3>
+  </div>
+  <div class="book-container-${category} book-container">
+
+
+  </div>
+</div>
+  `;
+    bookSection.appendChild(divCategory);
+};
+export const showBooks = (books, genre) => {
+    const bookContainer = document.querySelector(`.book-container-${genre}`);
     // Clear previous book data
     bookContainer.innerHTML = '';
     // Loop through each book and create a card for it

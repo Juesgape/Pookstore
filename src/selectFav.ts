@@ -55,18 +55,35 @@ sendLikesBtn?.addEventListener('click', async () => {
     let getBooks = new GetBooks()
     getBooks.getData()
 
-    setTimeout(() => {
-      showBooks(store_inventory.books)
-    }, 2000)
-
   }
 })
 
 
 //Showing books
 
-const showBooks = (books: Book[]) => {
-  const bookContainer = document.querySelector('.book-container') as HTMLElement;
+export const createBookCategory = (category: string) => {
+  const bookSection = document.querySelector('.book-section') as HTMLElement;
+
+  let divCategory = document.createElement('div')
+
+  divCategory.innerHTML = `
+  <div class="category">
+  <div class="category-name">
+    <h3 class="category-title">${category}</h3>
+  </div>
+  <div class="book-container-${category} book-container">
+
+
+  </div>
+</div>
+  `
+
+  bookSection.appendChild(divCategory)
+
+}
+
+export const showBooks = (books: Book[], genre: string) => {
+  const bookContainer = document.querySelector(`.book-container-${genre}`) as HTMLElement;
 
       // Clear previous book data
       bookContainer.innerHTML = '';
