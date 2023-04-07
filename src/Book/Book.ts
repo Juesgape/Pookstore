@@ -1,14 +1,15 @@
 class Book{
+  private _totalBookInPurchase = 0
     constructor(
     private _id: string,
     private _title: string,
-    private _author:string,
+    private _author: string,
     private _description: string,
     private _img: string,
-    private _genre:string,
-    private _price:string,
-    private _supplier:string,
-    private _stock:number
+    private _genre: string,
+    private _price: string,
+    private _supplier: string,
+    private _stock: number
     ){}
 
     get title() {
@@ -37,6 +38,14 @@ class Book{
 
     get stock() {
       return this._stock
+    }
+
+    set totalBookInPurchase(newValue: number) {
+      this._totalBookInPurchase += newValue //new value will always be 1 or -1
+    }
+
+    get totalBookInPurchase(): number {
+      return this._totalBookInPurchase
     }
 }
 

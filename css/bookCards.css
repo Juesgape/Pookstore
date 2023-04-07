@@ -95,6 +95,16 @@
   transition: all 0.2s ease-in-out;
 }
 
+.button-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cart-button span svg {
+  width: 20px;
+}
+
 .buy-button:hover,
 .cart-button:hover {
   background-color: #666;
@@ -124,3 +134,6 @@
   background-color: #aaa;
 }
 
+.hide {
+  display: none;
+}

@@ -1,8 +1,7 @@
 /* import * as puppeteer from "puppeteer" */
 import { Book } from "../Book/Book.js"
 import { store_inventory } from "../Inventory/Inventory.js"
-import { createBookCategory } from "../selectFav.js"
-import { showBooks } from "../selectFav.js"
+import { showBookInfo } from '../Animation/ShowBookInfo/ShowBookInfo.js'
 import { user } from "../selectFav.js"
 
 class GetBooks {
@@ -58,7 +57,6 @@ class GetBooks {
     public createBook(books: Object) {
       let id = 1
       let userFavLinks = this.firstWord(user.getUserLikes)
-      console.log(userFavLinks);
 
 
       for (const key in books) {
@@ -66,14 +64,13 @@ class GetBooks {
 
           //Checking if the genre is what the user wants
           if(!userFavLinks.includes(key)) {
-            console.log(`Does not include ${key}`);
-
             continue
           }
 
           const bookArray = books[key] // I honestly dont know what to do with this XDXD
+
           //this will create a new category in the index HTML code
-          createBookCategory(key)
+          showBookInfo.createBookCategory(key)
 
           //This will store all of our books by genre so that we can show them later on in out application
           let totalBooksByGenre: Book[] = []
@@ -91,7 +88,7 @@ class GetBooks {
             totalBooksByGenre.push(newBook)
             id += 1
           }
-          showBooks(totalBooksByGenre, key)
+          showBookInfo.showBooksByCategory(totalBooksByGenre, key)
         }
       }
 

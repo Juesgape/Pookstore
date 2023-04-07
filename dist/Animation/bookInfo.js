@@ -1,3 +1,5 @@
+let cartNumber = window.parent.document.querySelector('#number-cart');
+let currentCartNumber = 0;
 //get Back function
 const getBackToBooks = (book) => {
     const iframe = document.querySelector('#iframe-book-info');
@@ -27,4 +29,13 @@ const bookInfo = (book) => {
     bookDescription.innerHTML = book.description;
     bookImg.src = book.img;
 };
-export { getBackToBooks, bookInfo };
+//this section is for when we want to buy books
+const sumCartNumber = () => {
+    currentCartNumber += 1;
+    cartNumber.innerHTML = currentCartNumber.toString();
+};
+const subsCartNumber = () => {
+    currentCartNumber -= 1;
+    cartNumber.innerHTML = currentCartNumber.toString();
+};
+export {};
