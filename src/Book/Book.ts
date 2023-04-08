@@ -41,7 +41,10 @@ class Book{
     }
 
     set totalBookInPurchase(newValue: number) {
+      console.log(`were gonna add ${newValue} to ${this._totalBookInPurchase}`)
       this._totalBookInPurchase += newValue //new value will always be 1 or -1
+
+      console.log(`total ${this._totalBookInPurchase}`)
     }
 
     get totalBookInPurchase(): number {

@@ -82,8 +82,14 @@ class ShowBookInfo {
             moreInfoButton.addEventListener('click', () => {
                 this.moreInfoEvent(book);
             });
+            let addToCartButton = new AddToCartButton();
+            plusIcon.addEventListener('click', () => {
+                addToCartButton.addMoreBooks(addToCart, book);
+            });
+            deleteIcon.addEventListener('click', () => {
+                addToCartButton.removeBook(addToCart, book, plusIcon, deleteIcon);
+            });
             addToCart?.addEventListener('click', () => {
-                let addToCartButton = new AddToCartButton();
                 addToCartButton.showIcons(addToCart, deleteIcon, plusIcon, book);
             });
         });

@@ -7,18 +7,43 @@ class AddToCartButton {
             addToCart.innerHTML = 'Sold Out';
             return;
         }
-        if (book.totalBookInPurchase < 1 && book.totalBookInPurchase > -1) {
-            book.totalBookInPurchase = 1;
-        }
         addToCart.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
-        plusIcon.addEventListener('click', () => {
+        if (book.totalBookInPurchase === 0) {
             this.addMoreBooks(addToCart, book);
-        });
-        deleteIcon.addEventListener('click', () => {
-            this.removeBook(addToCart, book, plusIcon, deleteIcon);
-        });
+            this.addCartTotal();
+        }
         deleteIcon.classList.remove('hide');
         plusIcon.classList.remove('hide');
+    }
+    addCartTotal() {
+        let cartNumberContainer = document.querySelector('.cart-number-container');
+        cartNumberContainer?.classList.remove('hide');
+        // Get the span element by ID
+        const numberCart = document.querySelector('#number-cart');
+        // If the span element was not found, return or do something else
+        if (!numberCart) {
+            return;
+        }
+        // Get the current value of the span element and convert it to a number
+        let numberCartValue = parseInt(numberCart.innerText);
+        // Increment the value by 1 and set it back to the span element
+        numberCart.innerText = (numberCartValue + 1).toString();
+    }
+    subsCartTotal() {
+        let cartNumberContainer = document.querySelector('.cart-number-container');
+        // Get the span element by ID
+        const numberCart = document.querySelector('#number-cart');
+        // If the span element was not found, return or do something else
+        if (!numberCart) {
+            return;
+        }
+        // Get the current value of the span element and convert it to a number
+        let numberCartValue = parseInt(numberCart.innerText);
+        if (numberCartValue === 1) {
+            cartNumberContainer?.classList.add('hide');
+            numberCart.innerText = (numberCartValue - 1).toString();
+            return;
+        }
     }
     addMoreBooks(totalBooks, book) {
         if (book.totalBookInPurchase < book.stock) {
@@ -27,17 +52,17 @@ class AddToCartButton {
         }
     }
     removeBook(totalBooks, book, plusIcon, deleteIcon) {
-        if (book.totalBookInPurchase === 1) {
+        if (book.totalBookInPurchase > 0) {
+            book.totalBookInPurchase = -1;
+        }
+        if (book.totalBookInPurchase === 0) {
             plusIcon.classList.add('hide');
             deleteIcon.classList.add('hide');
-            book.totalBookInPurchase = -1;
-            console.log(`Total books in purchase ${book.totalBookInPurchase}`);
             totalBooks.innerHTML = 'Add to Cart';
-            return;
         }
-        book.totalBookInPurchase = -1;
-        totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
-        console.log(`Total books in purchase ${book.totalBookInPurchase}`);
+        else {
+            totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
+        }
     }
 }
 export { AddToCartButton };

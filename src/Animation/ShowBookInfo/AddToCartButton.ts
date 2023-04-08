@@ -12,28 +12,62 @@ class AddToCartButton {
       return
     }
 
-    if(book.totalBookInPurchase < 1 && book.totalBookInPurchase > -1) {
-      book.totalBookInPurchase = 1
-    }
-
     addToCart.innerHTML = `${book.totalBookInPurchase}/${book.stock}`
 
-    plusIcon.addEventListener('click', () => {
+
+    if(book.totalBookInPurchase === 0) {
       this.addMoreBooks(addToCart, book)
-    })
-
-    deleteIcon.addEventListener('click', () => {
-      this.removeBook(addToCart, book, plusIcon, deleteIcon)
-    })
-
+      this.addCartTotal()
+    }
     deleteIcon.classList.remove('hide');
     plusIcon.classList.remove('hide');
   }
 
-  public addMoreBooks(totalBooks: HTMLElement, book: Book) {
+  public addCartTotal() {
+    let cartNumberContainer = document.querySelector('.cart-number-container')
+    cartNumberContainer?.classList.remove('hide')
 
+    // Get the span element by ID
+    const numberCart = document.querySelector('#number-cart') as HTMLSpanElement;
+
+    // If the span element was not found, return or do something else
+    if (!numberCart) {
+      return;
+    }
+
+    // Get the current value of the span element and convert it to a number
+    let numberCartValue = parseInt(numberCart.innerText);
+
+    // Increment the value by 1 and set it back to the span element
+    numberCart.innerText = (numberCartValue + 1).toString();
+
+  }
+
+  public subsCartTotal() {
+    let cartNumberContainer = document.querySelector('.cart-number-container')
+
+    // Get the span element by ID
+    const numberCart = document.querySelector('#number-cart') as HTMLSpanElement;
+
+    // If the span element was not found, return or do something else
+    if (!numberCart) {
+      return;
+    }
+
+    // Get the current value of the span element and convert it to a number
+    let numberCartValue = parseInt(numberCart.innerText);
+
+    if(numberCartValue === 1) {
+      cartNumberContainer?.classList.add('hide')
+      numberCart.innerText = (numberCartValue - 1).toString();
+      return
+    }
+
+  }
+
+  public addMoreBooks(totalBooks: HTMLElement, book: Book) {
     if(book.totalBookInPurchase < book.stock) {
-      book.totalBookInPurchase = 1
+      book.totalBookInPurchase = 1;
       totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`
     }
 
@@ -41,21 +75,19 @@ class AddToCartButton {
 
   public removeBook(totalBooks: HTMLElement, book: Book, plusIcon: HTMLElement, deleteIcon: HTMLElement) {
 
-    if(book.totalBookInPurchase === 1) {
-      plusIcon.classList.add('hide')
-      deleteIcon.classList.add('hide')
-      book.totalBookInPurchase = -1
-      console.log(`Total books in purchase ${book.totalBookInPurchase}`)
-      totalBooks.innerHTML = 'Add to Cart'
-      return
+    if(book.totalBookInPurchase > 0) {
+      book.totalBookInPurchase = -1;
     }
 
-    book.totalBookInPurchase = -1
-    totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`
-    console.log(`Total books in purchase ${book.totalBookInPurchase}`)
+    if (book.totalBookInPurchase === 0) {
+      plusIcon.classList.add('hide');
+      deleteIcon.classList.add('hide');
+      totalBooks.innerHTML = 'Add to Cart';
+    } else {
+      totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
+    }
 
   }
-
 }
 
 export {
