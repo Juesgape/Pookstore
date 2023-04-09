@@ -2,7 +2,7 @@ import {Order} from "../Order/Order"
 
 class Orderlist{
     constructor(
-    private orders:Order[],
+    private orders: Order[],
     private totalOrderList: number
     ){}
 

@@ -1,8 +1,7 @@
 /* import * as puppeteer from "puppeteer" */
 import { Book } from "../Book/Book.js"
 import { store_inventory } from "../Inventory/Inventory.js"
-import { createBookCategory } from "../selectFav.js"
-import { showBooks } from "../selectFav.js"
+import { showBookInfo } from '../Animation/ShowBookInfo/ShowBookInfo.js'
 import { user } from "../selectFav.js"
 
 class GetBooks {
@@ -46,15 +45,19 @@ class GetBooks {
       }
 
 
-      /* public getFavoriteLinks(userLikes: string[]): void {
-
-
-
-    } */
+      public firstWord(genre: string[]): string[] {
+        const result = [];
+        for (let i = 0; i < genre.length; i++) {
+          const words = genre[i].split(' ');
+          result.push(words[0]);
+        }
+        return result;
+      }
 
     public createBook(books: Object) {
       let id = 1
-      let userFavLinks = user.getUserLikes
+      let userFavLinks = this.firstWord(user.getUserLikes)
+
 
       for (const key in books) {
         if(books.hasOwnProperty(key)) {
@@ -65,8 +68,9 @@ class GetBooks {
           }
 
           const bookArray = books[key] // I honestly dont know what to do with this XDXD
+
           //this will create a new category in the index HTML code
-          createBookCategory(key)
+          showBookInfo.createBookCategory(key)
 
           //This will store all of our books by genre so that we can show them later on in out application
           let totalBooksByGenre: Book[] = []
@@ -84,7 +88,7 @@ class GetBooks {
             totalBooksByGenre.push(newBook)
             id += 1
           }
-          showBooks(totalBooksByGenre, key)
+          showBookInfo.showBooksByCategory(totalBooksByGenre, key)
         }
       }
 

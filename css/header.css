@@ -1,4 +1,7 @@
 header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   background-color: #f9f9f9;
   color: #333333;
   padding: 20px;
@@ -26,11 +29,6 @@ nav li {
   font-size: 1.8rem;
 }
 
-nav a:hover {
-  color:darkturquoise;
-  transition: .2s ease-in-out;
-}
-
 nav a {
   color: #333333;
   text-decoration: none;
@@ -42,11 +40,6 @@ nav .cart-icon {
   transition: .2s ease-in-out;
 }
 
-nav .cart-icon:hover {
-  color:darkturquoise;
-  transition: .2s ease-in-out;
-}
-
 /* Style the bookstore name */
 h1 {
   margin-top: 0;
@@ -55,3 +48,23 @@ h1 {
   font-size: 4rem;
 }
 
+.cart-container {
+  cursor: pointer;
+  position: relative;
+}
+.cart-container:hover {
+  color:darkturquoise;
+  transition: .2s ease-in-out;
+}
+.cart-number-container {
+  position: absolute;
+  right: 3rem;
+  bottom: 2.5rem;
+  border-radius: 20px;
+}
+
+.cart-number-container span {
+
+  background-color: red;
+  border-radius: 10px;
+}

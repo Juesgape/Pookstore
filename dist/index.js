@@ -1,4 +1,4 @@
-import { Login } from './login/Login.js';
+import { Login } from './Login/Login.js';
 const loginButton = document.querySelector('#submit');
 loginButton?.addEventListener('click', makeLogin);
 function makeLogin() {
