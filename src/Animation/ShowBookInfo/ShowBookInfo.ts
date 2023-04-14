@@ -80,7 +80,7 @@ class ShowBookInfo {
           <h3 class="book-title">${book.title}</h3>
           <img src="${book.img}" alt="${book.title} cover">
           <p class="book-author">By: ${book.author}</p>
-          <p class="book-price">$${Math.floor(Math.random() * 500000).toLocaleString()}</p>
+          <p class="book-price">$${book.price.toLocaleString()}</p>
           <div class="book-buttons">
             <button class="buy-button">View more info</button>
             <button class="cart-button">
@@ -116,7 +116,7 @@ class ShowBookInfo {
           addToCartButton.removeBook(addToCart, book, plusIcon, deleteIcon)
         })
 
-        addToCart?.addEventListener('click', () => {
+        addToCart.addEventListener('click', () => {
           addToCartButton.showIcons(addToCart, deleteIcon, plusIcon, book)
         })
       })

@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="./css/likesInterface/likesInterface.css">
   <!-- bookInfo interface -->
   <link rel="stylesheet" href="./css/bookInfo/bookInfo.css">
+  <!-- cart menu -->
+  <link rel="stylesheet" href="./css/cartMenu/cartMenu.css">
   <!-- Import icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -88,7 +90,7 @@
     </div>
   </section>
 
-    <header>
+    <header class="hide">
       <h1>PookStore</h1>
       <nav>
         <ul>
@@ -96,7 +98,7 @@
           <li><a href="#">Books</a></li>
           <li><a href="#">About</a></li>
           <li>
-            <a href="#">
+            <a>
               <div class="cart-container">
                 <i class="fas fa-shopping-cart cart-icon"></i>
               </div>
@@ -110,39 +112,113 @@
     </header>
 
     <main class="main-container">
-      <!-- Your main content goes here -->
+      <!-- The maain content goes here -->
 
       <section class="book-section">
 
-        <!-- <div class="category">
-          <div class="category-name">
-            <h3 class="category-title">Romance</h3>
-          </div>
-          <div class="book-container">
+      </section>
 
-            <div class="book-card">
-              <h3 class="book-title">Book Title</h3>
-              <img src="./assets/153e189e846e078fb0d3053355beff3f.jpg" alt="Book cover">
-              <p class="book-author">By: Author Name</p>
-              <p class="book-price">$9.99</p>
-              <div class="book-buttons">
-                <button class="buy-button">Buy</button>
-                <button class="cart-button">Add to Cart</button>
+      <div class="cart-purchases-container hide">
+        <div class="cart-purchases">
+
+          <div class="x-button-container">
+            <div class="x-button"></div>
+            <div>
+              <p>These are your products</p>
+            </div>
+          </div>
+
+          <div class="products-container">
+
+            <div class="cart-zero-container">
+              <div class="cart-hide-continaer">
+                <div class="cart-svg"></div>
+                <span>Your cart is empty</span>
               </div>
             </div>
 
-          </div>
-        </div> -->
+            <div class="products-info hide">
+              <!--  -->
+              <!-- <div class="product-info">
 
-      </section>
+                <div class="delete-book-button"></div>
+
+                <div class="product-img-container">
+                  <figure>
+                    <img src="./assets/153e189e846e078fb0d3053355beff3f.jpg" alt="">
+                  </figure>
+                </div>
+
+                <div class="book-all-info-container">
+                  <span class="book-author">book author</span>
+                  <p class="book-title">book title</p>
+                </div>
+
+              </div>
+
+              <div class="book-quantity">
+
+                <div class="add-book-container">
+                  <div>
+                    <p  class="subs-book-button">-</p>
+                  </div>
+                  <div><span class="total-book-in-purchase">0</span></div>
+                  <div>
+                    <p class="add-book-button">+</p>
+                  </div>
+                </div>
+
+                <div class="book-total">
+                  <p>$<span>0</span></p>
+                </div>
+              </div> -->
+
+              <!-- more content -->
+
+          <div class="total-order-container">
+            <div class="total-order">
+
+              <div class="total-info-container">
+                <div class="total-info">
+
+                  <div>
+                    <p>Subtotal:</p>
+                    <p>$<span class="sub-total">0</span></p>
+                  </div>
+
+                  <div>
+                    <p>Shipment:</p>
+                    <p><span class="shipment">Pending</span></p>
+                  </div>
+
+                  <div>
+                    <p>Total:</p>
+                    <p>$<span class="total">0</span></p>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="buy-button-container">
+                <button>Buy</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
 
     </main>
+
 
     <div class="book-info-container hide">
       <div class="book-info">
         <iframe id="iframe-book-info" src="./interface/bookInfo.html" frameborder="0"></iframe>
       </div>
     </div>
+
 
 
     <footer>
@@ -175,6 +251,7 @@
     </footer>
 
     <script type="module" src="./dist/selectFav.js"></script>
-    <script src="./dist/Animation/showBookInfo.js"></script>
+    <script type="module" src="./dist/Animation/showBookInfo.js"></script>
+    <script type="module" src="./dist/Animation/Cart/displayCart.js"></script>
 </body>
 </html>

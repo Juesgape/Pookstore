@@ -1,14 +1,34 @@
+import { displayCart } from "../Animation/Cart/displayCart.js";
 class Orderlist {
-    orders;
-    totalOrderList;
-    constructor(orders, totalOrderList) {
-        this.orders = orders;
-        this.totalOrderList = totalOrderList;
+    _orders;
+    _totalOrderList;
+    constructor(_orders, _totalOrderList) {
+        this._orders = _orders;
+        this._totalOrderList = _totalOrderList;
+    }
+    get orders() {
+        return this._orders;
+    }
+    addOrders(order) {
+        this._orders.push(order);
+        //Show Book order in the cart interface
+        displayCart.showBooksOrder(order.book);
+    }
+    removeOrders(order) {
+        const index = this._orders.findIndex(item => item === order);
+        if (index !== -1) {
+            this._orders.splice(index, 1);
+            console.log('Element removed succesfully');
+            console.log(this.orders);
+        }
+        else {
+            console.error('The element does not exist');
+        }
     }
     resetProducts() {
     }
     sellProducts() {
     }
-    removeOrder() { }
 }
-export {};
+let orderList = new Orderlist([], 0);
+export { orderList };

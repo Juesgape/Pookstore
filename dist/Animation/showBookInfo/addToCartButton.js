@@ -1,12 +1,27 @@
+import { orderList } from "../../Orderlist/Orderlist.js";
+import { Order } from "../../Order/Order.js";
+import { user } from "../../selectFav.js";
 class AddToCartButton {
+    //This will be the order per book
+    _order = {};
+    constructor() {
+    }
+    set order(newOrder) {
+        this._order = newOrder;
+    }
+    get order() {
+        return this._order;
+    }
     showIcons(addToCart, deleteIcon, plusIcon, book) {
         if (book.stock === 0) {
-            console.log('Sold out', book.stock);
             addToCart.style.color = 'red';
             addToCart.style.background = 'none';
             addToCart.innerHTML = 'Sold Out';
             return;
         }
+        /* console.log(orderList.orders)
+        console.log(book.totalBookInPurchase); */
+        //Then, we keep showing the information
         addToCart.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
         if (book.totalBookInPurchase === 0) {
             this.addMoreBooks(addToCart, book);
@@ -14,6 +29,12 @@ class AddToCartButton {
         }
         deleteIcon.classList.remove('hide');
         plusIcon.classList.remove('hide');
+        //here, we will create the order
+        const newOrder = new Order;
+        newOrder.makeOrder(user, book);
+        this.order = newOrder;
+        //Adding the order to the listOrder
+        orderList.addOrders(newOrder);
     }
     addCartTotal() {
         let cartNumberContainer = document.querySelector('.cart-number-container');
@@ -42,26 +63,30 @@ class AddToCartButton {
         if (numberCartValue === 1) {
             cartNumberContainer?.classList.add('hide');
             numberCart.innerText = (numberCartValue - 1).toString();
-            return;
+        }
+        else {
+            numberCart.innerText = (numberCartValue - 1).toString();
         }
     }
     addMoreBooks(totalBooks, book) {
         if (book.totalBookInPurchase < book.stock) {
             book.totalBookInPurchase = 1;
+            console.log(`Total book in purchse: ${book.totalBookInPurchase}`);
             totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
         }
     }
     removeBook(totalBooks, book, plusIcon, deleteIcon) {
         if (book.totalBookInPurchase > 0) {
             book.totalBookInPurchase = -1;
+            totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
         }
         if (book.totalBookInPurchase === 0) {
             plusIcon.classList.add('hide');
             deleteIcon.classList.add('hide');
             totalBooks.innerHTML = 'Add to Cart';
-        }
-        else {
-            totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
+            this.subsCartTotal();
+            //remove element from orderList
+            orderList.removeOrders(this.order);
         }
     }
 }

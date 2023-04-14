@@ -1,0 +1,162 @@
+.cart-purchases {
+  position: fixed;
+  font-size: 2rem;
+  width: 375px;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+.x-button-container {
+  text-align: center;
+  position: relative;
+  margin: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px black solid;
+}
+
+.x-button {
+  width: 26px;
+  height: 26px;
+  background-image: url('../../assets/cancel.svg');
+  position: absolute;
+  right: 1rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.cart-zero-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.cart-svg {
+  height: 200px;
+  background-image: url('../../assets/cart.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.products-container {
+  height: 350px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.product-info {
+  display: flex;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  position: relative;
+}
+
+.delete-book-button {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../assets/delete.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: 0.7rem;
+  right: 3.3rem;
+  cursor: pointer;
+}
+
+.book-all-info-container {
+  width: 100%;
+  padding-left: 2rem;
+}
+
+.product-img-container figure {
+  width: 100px;
+}
+
+.product-img-container figure img {
+  width: 100%;
+}
+
+.total-info div {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  color: white;
+}
+
+.total-order-container {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #114471;
+}
+
+.total-order {
+  padding: 2rem;
+}
+
+.book-author {
+  font-size: 1.6rem;
+  color: rgb(160, 160, 160);
+}
+
+.book-title {
+  padding-top: 1.2rem;
+}
+
+.book-quantity {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+  border-bottom: 1px rgb(162, 162, 162) solid;
+  padding-bottom: 1rem;
+}
+
+.add-book-container {
+  display: flex;
+  padding-right: 8rem;
+}
+
+.add-book-button {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.subs-book-button {
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.total-book-in-purchase {
+  font-size: 25px;
+}
+
+.add-book-container div {
+  padding-right: 2rem;
+}
+
+.book-total {
+  padding-right: 4rem;
+}
+
+.book-total {
+  font-size: 25px;
+}
+
+.buy-button-container button {
+  width: 100%;
+  background-color: #FF7F50;
+  font-size: 1.8rem;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  color: white;
+}

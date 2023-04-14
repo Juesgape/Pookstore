@@ -80,7 +80,7 @@ class GetBooks {
             //destructuring the book properties
             const {title, author, description, img} = book;
             //creating instances of the class Book
-            const newBook = new Book(id.toString(), title, author, description, img, genre, Math.floor(Math.random() * 500000).toLocaleString(), 'Unknow', Math.floor(Math.random() * 10))
+            const newBook = new Book(id.toString(), title, author, description, img, genre, Math.floor(Math.random() * 500000), 'Unknow', Math.floor(Math.random() * 10))
 
             //sending books to inventory
             store_inventory.setBooks = newBook
@@ -89,6 +89,8 @@ class GetBooks {
             id += 1
           }
           showBookInfo.showBooksByCategory(totalBooksByGenre, key)
+          let header = document.querySelector('header')
+          header?.classList.remove('hide')
         }
       }
 
