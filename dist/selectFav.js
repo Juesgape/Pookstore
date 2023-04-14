@@ -1,6 +1,6 @@
 import { GetBooks } from './Getbooks/Getbooks.js';
 import { LocalData } from './LocalData/LocalData.js';
-import { Client } from './User/Client.js';
+import { Client } from './user/Client.js';
 const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
@@ -24,6 +24,8 @@ buttonsLikes.forEach(button => {
         }
         else {
             if (elementsSelected.length === 5) {
+                let caution = document.getElementById('caution');
+                caution.textContent = "No puedes seleccionar más de 5 géneros";
                 console.warn('No puedes seleccionar más de 5 géneros');
             }
             else {
@@ -36,6 +38,8 @@ buttonsLikes.forEach(button => {
 //send likes button
 sendLikesBtn?.addEventListener('click', async () => {
     if (elementsSelected.length < 3) {
+        let caution = document.getElementById('caution');
+        caution.textContent = "Debes seleccionar al menos 3 géneros para continuar";
         console.warn('You must select at least more than 2 books');
     }
     else {

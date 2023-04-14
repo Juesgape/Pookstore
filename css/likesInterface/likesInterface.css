@@ -83,3 +83,16 @@
 .send-container button:hover {
   background-color: rgb(199, 190, 190);
 }
+
+.caution-container{
+  align-items: center;
+  justify-content: center;
+  
+  text-align: center;
+}
+
+#caution{
+  color: #333;
+  font-weight: bold;
+  font-size: 2rem;
+}

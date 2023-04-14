@@ -30,7 +30,10 @@ buttonsLikes.forEach(button => {
       }
     } else {
       if (elementsSelected.length === 5) {
+        let caution: HTMLSpanElement=(document.getElementById('caution') as HTMLSpanElement)
+        caution.textContent="No puedes seleccionar más de 5 géneros"
         console.warn('No puedes seleccionar más de 5 géneros')
+        
       } else {
         button.setAttribute('id', 'btn-selected')
         elementsSelected.push(buttonText!)
@@ -43,6 +46,8 @@ buttonsLikes.forEach(button => {
 sendLikesBtn?.addEventListener('click', async () => {
 
   if(elementsSelected.length < 3) {
+    let caution: HTMLSpanElement=(document.getElementById('caution') as HTMLSpanElement)
+        caution.textContent="Debes seleccionar al menos 3 géneros para continuar"
     console.warn('You must select at least more than 2 books')
   } else {
     user.setLikes = elementsSelected
