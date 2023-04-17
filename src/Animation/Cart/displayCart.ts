@@ -1,13 +1,19 @@
 import { Book } from "src/Book/Book.js"
 import { orderList } from "../../Orderlist/Orderlist.js"
+import { Order } from "../../Order/Order.js"
 
 class DisplayCart {
   cartContainer = document.querySelector('.cart-container') as HTMLElement
   cartPurchaseContainer = document.querySelector('.cart-purchases-container') as HTMLElement
   xButton = document.querySelector('.x-button') as HTMLElement
 
-  constructor() {
+  constructor(
+    private _deleteButtonsArr: HTMLElement[] = []
+  ) {
+  }
 
+  public set deleteButtonsArr(arr: HTMLElement[]) {
+    this._deleteButtonsArr = arr
   }
 
   clickCart() {
@@ -42,48 +48,54 @@ class DisplayCart {
     }
   }
 
-  showBooksOrder(book: Book) {
-    console.log('Function invoked', book.totalBookInPurchase);
+  showBooksOrder(order: Order) {
+    console.log('Order quantity', order.quantity);
 
     const productsInfoContainer = document.querySelector('.products-info') as HTMLElement
+
+    // Create a unique identifier for the fragment
+    const fragmentId = `book-${order.book.id}`
+
     // Create a DocumentFragment
     const fragment = document.createDocumentFragment()
     // Create a temporary container element
     const tempContainer = document.createElement('div')
 
     tempContainer.innerHTML = `
-    <div class="product-info">
+    <div class="product-info" id="${fragmentId}">
       <div class="delete-book-button"></div>
 
         <div class="product-img-container">
           <figure>
-            <img src="${book.img}" alt="">
+            <img src="${order.book.img}" alt="">
           </figure>
         </div>
 
         <div class="book-all-info-container">
-          <span class="book-author">${book.author}</span>
-          <p class="book-title">${book.title}</p>
-        </div>
+          <span class="book-author">${order.book.author}</span>
+          <p class="book-title">${order.book.title}</p>
 
-      </div>
-
-      <div class="book-quantity">
+          <div class="book-quantity">
 
         <div class="add-book-container">
           <div>
             <p  class="subs-book-button">-</p>
           </div>
-          <div><span class="total-book-in-purchase">${book.totalBookInPurchase}</span></div>
+          <div><span class="total-book-in-purchase">${order.quantity}</span></div>
           <div>
             <p class="add-book-button">+</p>
           </div>
         </div>
 
         <div class="book-total">
-          <p>$<span>${(book.price * book.totalBookInPurchase).toLocaleString()}</span></p>
+          <p>$<span>${(order.book.price * order.quantity).toLocaleString()}</span></p>
         </div>
-    </div>
+      </div>
+
+        </div>
+
+
+  </div>
     `
 
     while(tempContainer.firstChild) {
@@ -91,8 +103,31 @@ class DisplayCart {
     }
 
     productsInfoContainer.appendChild(fragment)
+    this.deleteFunction(fragmentId, order)
   }
 
+
+  public deleteFunction(fragmentId: string, order: Order) {
+
+    // Add event listener to the delete button
+    const deleteBtn = document.querySelector(`#${fragmentId} .delete-book-button`) as HTMLElement
+    deleteBtn.addEventListener('click', () => {
+      // Find the product-info container element using the unique identifier
+      const productInfoContainer = document.querySelector(`#${fragmentId}`) as HTMLElement
+      if (productInfoContainer) {
+        // Find the book-quantity element inside the product-info container and remove it
+        const bookQuantityContainer = productInfoContainer.querySelector('.book-quantity') as HTMLElement
+        if (bookQuantityContainer) {
+          bookQuantityContainer.remove()
+        }
+      // Remove the product-info container element from the DOM
+      productInfoContainer.remove()
+      }
+      //setting order.quantity to 0 since we deleted the order
+      order.resetQuantity()
+  })
+
+  }
 }
 
 let displayCart = new DisplayCart()

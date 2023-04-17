@@ -1,6 +1,7 @@
 class Order {
     _buyer;
     _book;
+    _addToCartButton;
     _quantity = 0;
     _totalOrder = 0; // Multiply the book price by the quantity
     constructor() { }
@@ -13,6 +14,12 @@ class Order {
     get quantity() {
         return this._quantity;
     }
+    get addToCartButton() {
+        return this._addToCartButton;
+    }
+    set addToCartButton(value) {
+        this._addToCartButton = value;
+    }
     set buyer(user) {
         this._buyer = user;
     }
@@ -20,10 +27,10 @@ class Order {
         this._book = book;
     }
     set quantity(bookQuantities) {
-        this._quantity = bookQuantities;
+        this._quantity += bookQuantities;
     }
     set totalOrder(book) {
-        this._totalOrder = book.totalBookInPurchase * book.price;
+        this._totalOrder = this.quantity * book.price;
     }
     //Getter of the totalOrder
     getTotalOrder() {
@@ -35,6 +42,10 @@ class Order {
         this.book = book;
         this.quantity += 1;
         this.totalOrder = book;
+    }
+    resetQuantity() {
+        this._quantity = 0;
+        this.addToCartButton.removeBook(this.book);
     }
 }
 let order = new Order();

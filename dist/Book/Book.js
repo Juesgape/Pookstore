@@ -8,7 +8,6 @@ class Book {
     _price;
     _supplier;
     _stock;
-    _totalBookInPurchase = 0;
     constructor(_id, _title, _author, _description, _img, _genre, _price, _supplier, _stock) {
         this._id = _id;
         this._title = _title;
@@ -19,6 +18,9 @@ class Book {
         this._price = _price;
         this._supplier = _supplier;
         this._stock = _stock;
+    }
+    get id() {
+        return this._id;
     }
     get title() {
         return this._title;
@@ -40,12 +42,6 @@ class Book {
     }
     get stock() {
         return this._stock;
-    }
-    set totalBookInPurchase(newValue) {
-        this._totalBookInPurchase += newValue; //new value will always be 1 or -1
-    }
-    get totalBookInPurchase() {
-        return this._totalBookInPurchase;
     }
 }
 export { Book };

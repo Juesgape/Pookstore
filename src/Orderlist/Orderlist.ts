@@ -15,7 +15,8 @@ class Orderlist{
     public addOrders(order: Order) {
       this._orders.push(order)
       //Show Book order in the cart interface
-      displayCart.showBooksOrder(order.book)
+      displayCart.showBooksOrder(order)
+      console.log(this.orders)
     }
 
     public removeOrders(order: Order) {
@@ -24,12 +25,9 @@ class Orderlist{
 
       if(index !== -1) {
         this._orders.splice(index, 1)
-        console.log('Element removed succesfully');
-        console.log(this.orders);
       } else {
         console.error('The element does not exist')
       }
-
 
     }
 

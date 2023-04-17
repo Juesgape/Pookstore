@@ -12,14 +12,13 @@ class Orderlist {
     addOrders(order) {
         this._orders.push(order);
         //Show Book order in the cart interface
-        displayCart.showBooksOrder(order.book);
+        displayCart.showBooksOrder(order);
+        console.log(this.orders);
     }
     removeOrders(order) {
         const index = this._orders.findIndex(item => item === order);
         if (index !== -1) {
             this._orders.splice(index, 1);
-            console.log('Element removed succesfully');
-            console.log(this.orders);
         }
         else {
             console.error('The element does not exist');

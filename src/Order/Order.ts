@@ -1,10 +1,12 @@
 import { Book } from "src/Book/Book";
 import { User } from "src/User/User";
 import { orderList } from "src/Orderlist/Orderlist";
+import { AddToCartButton } from "../Animation/ShowBookInfo/AddToCartButton.js";
 
 class Order{
     private _buyer!: User;
     private _book!: Book;
+    private _addToCartButton!: AddToCartButton
     private _quantity: number = 0;
     private _totalOrder: number = 0; // Multiply the book price by the quantity
 
@@ -23,6 +25,13 @@ class Order{
       return this._quantity
     }
 
+    get addToCartButton() {
+      return this._addToCartButton
+    }
+
+    set addToCartButton(value: AddToCartButton) {
+      this._addToCartButton = value
+    }
 
     set buyer(user: User) {
       this._buyer = user
@@ -33,11 +42,11 @@ class Order{
     }
 
     set quantity(bookQuantities: number) {
-      this._quantity =  bookQuantities
+      this._quantity +=  bookQuantities
     }
 
     set totalOrder(book: Book) {
-      this._totalOrder = book.totalBookInPurchase * book.price
+      this._totalOrder = this.quantity * book.price
     }
 
     //Getter of the totalOrder
@@ -51,6 +60,11 @@ class Order{
       this.book = book
       this.quantity += 1
       this.totalOrder = book
+    }
+
+    public resetQuantity() {
+      this._quantity = 0
+      this.addToCartButton.removeBook(this.book)
     }
 }
 

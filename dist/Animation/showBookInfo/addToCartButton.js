@@ -2,9 +2,17 @@ import { orderList } from "../../Orderlist/Orderlist.js";
 import { Order } from "../../Order/Order.js";
 import { user } from "../../selectFav.js";
 class AddToCartButton {
+    deleteIcon;
+    plusIcon;
+    book;
+    addToCart;
     //This will be the order per book
     _order = {};
-    constructor() {
+    constructor(deleteIcon, plusIcon, book, addToCart) {
+        this.deleteIcon = deleteIcon;
+        this.plusIcon = plusIcon;
+        this.book = book;
+        this.addToCart = addToCart;
     }
     set order(newOrder) {
         this._order = newOrder;
@@ -12,29 +20,28 @@ class AddToCartButton {
     get order() {
         return this._order;
     }
-    showIcons(addToCart, deleteIcon, plusIcon, book) {
+    showIcons(book) {
         if (book.stock === 0) {
-            addToCart.style.color = 'red';
-            addToCart.style.background = 'none';
-            addToCart.innerHTML = 'Sold Out';
+            this.addToCart.style.color = 'red';
+            this.addToCart.style.background = 'none';
+            this.addToCart.innerHTML = 'Sold Out';
             return;
         }
         /* console.log(orderList.orders)
         console.log(book.totalBookInPurchase); */
-        //Then, we keep showing the information
-        addToCart.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
-        if (book.totalBookInPurchase === 0) {
-            this.addMoreBooks(addToCart, book);
-            this.addCartTotal();
-        }
-        deleteIcon.classList.remove('hide');
-        plusIcon.classList.remove('hide');
+        this.deleteIcon.classList.remove('hide');
+        this.plusIcon.classList.remove('hide');
         //here, we will create the order
-        const newOrder = new Order;
+        const newOrder = new Order();
+        newOrder.addToCartButton = this;
         newOrder.makeOrder(user, book);
         this.order = newOrder;
         //Adding the order to the listOrder
         orderList.addOrders(newOrder);
+        //adding quantity to the order
+        this.addCartTotal();
+        //Then, we keep showing the information
+        this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
     }
     addCartTotal() {
         let cartNumberContainer = document.querySelector('.cart-number-container');
@@ -68,22 +75,22 @@ class AddToCartButton {
             numberCart.innerText = (numberCartValue - 1).toString();
         }
     }
-    addMoreBooks(totalBooks, book) {
-        if (book.totalBookInPurchase < book.stock) {
-            book.totalBookInPurchase = 1;
-            console.log(`Total book in purchse: ${book.totalBookInPurchase}`);
-            totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
+    addMoreBooks(book) {
+        if (this.order.quantity < book.stock) {
+            this.order.quantity = 1;
+            /* console.log(`Total book in purchse: ${book.totalBookInPurchase}`); */
+            this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
         }
     }
-    removeBook(totalBooks, book, plusIcon, deleteIcon) {
-        if (book.totalBookInPurchase > 0) {
-            book.totalBookInPurchase = -1;
-            totalBooks.innerHTML = `${book.totalBookInPurchase}/${book.stock}`;
+    removeBook(book) {
+        if (this.order.quantity > 0) {
+            this.order.quantity = -1;
+            this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
         }
-        if (book.totalBookInPurchase === 0) {
-            plusIcon.classList.add('hide');
-            deleteIcon.classList.add('hide');
-            totalBooks.innerHTML = 'Add to Cart';
+        if (this.order.quantity === 0) {
+            this.plusIcon.classList.add('hide');
+            this.deleteIcon.classList.add('hide');
+            this.addToCart.innerHTML = 'Add to Cart';
             this.subsCartTotal();
             //remove element from orderList
             orderList.removeOrders(this.order);

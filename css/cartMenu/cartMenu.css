@@ -54,7 +54,10 @@
   display: flex;
   padding-left: 2rem;
   padding-top: 2rem;
+  padding-bottom: 1rem;
   position: relative;
+  border-bottom: 1px rgb(162, 162, 162) solid;
+  overflow: hidden;
 }
 
 .delete-book-button {
@@ -112,15 +115,14 @@
 
 .book-quantity {
   display: flex;
-  justify-content: space-around;
-  padding-top: 1rem;
-  border-bottom: 1px rgb(162, 162, 162) solid;
+  justify-content: space-evenly;
+  padding-top: 5rem;
   padding-bottom: 1rem;
 }
 
 .add-book-container {
   display: flex;
-  padding-right: 8rem;
+  padding-right: 4rem;
 }
 
 .add-book-button {
@@ -142,7 +144,7 @@
 }
 
 .book-total {
-  padding-right: 4rem;
+  padding-right: rem;
 }
 
 .book-total {

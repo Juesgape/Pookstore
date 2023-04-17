@@ -82,15 +82,15 @@ class ShowBookInfo {
             moreInfoButton.addEventListener('click', () => {
                 this.moreInfoEvent(book);
             });
-            let addToCartButton = new AddToCartButton();
+            let addToCartButton = new AddToCartButton(deleteIcon, plusIcon, book, addToCart);
             plusIcon.addEventListener('click', () => {
-                addToCartButton.addMoreBooks(addToCart, book);
+                addToCartButton.addMoreBooks(book);
             });
             deleteIcon.addEventListener('click', () => {
-                addToCartButton.removeBook(addToCart, book, plusIcon, deleteIcon);
+                addToCartButton.removeBook(book);
             });
             addToCart.addEventListener('click', () => {
-                addToCartButton.showIcons(addToCart, deleteIcon, plusIcon, book);
+                addToCartButton.showIcons(book);
             });
         });
     }

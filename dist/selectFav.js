@@ -1,6 +1,6 @@
 import { GetBooks } from './Getbooks/Getbooks.js';
 import { LocalData } from './LocalData/LocalData.js';
-import { Client } from './user/Client.js';
+import { Client } from './User/Client.js';
 const userName = document.querySelector('.userName');
 let localInfo = new LocalData();
 let userData = localInfo.getUser();
