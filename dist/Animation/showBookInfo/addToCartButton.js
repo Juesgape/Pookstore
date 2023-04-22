@@ -1,6 +1,7 @@
 import { orderList } from "../../Orderlist/Orderlist.js";
 import { Order } from "../../Order/Order.js";
 import { user } from "../../selectFav.js";
+import { displayCart } from "../Cart/displayCart.js";
 class AddToCartButton {
     deleteIcon;
     plusIcon;
@@ -8,19 +9,26 @@ class AddToCartButton {
     addToCart;
     //This will be the order per book
     _order = {};
+    _cartFragment;
     constructor(deleteIcon, plusIcon, book, addToCart) {
         this.deleteIcon = deleteIcon;
         this.plusIcon = plusIcon;
         this.book = book;
         this.addToCart = addToCart;
     }
+    set cartFragment(obj) {
+        this._cartFragment = obj;
+    }
     set order(newOrder) {
         this._order = newOrder;
+    }
+    get cartFragment() {
+        return this._cartFragment;
     }
     get order() {
         return this._order;
     }
-    showIcons(book) {
+    showIcons(book, addToCartButtonObj) {
         if (book.stock === 0) {
             this.addToCart.style.color = 'red';
             this.addToCart.style.background = 'none';
@@ -37,11 +45,16 @@ class AddToCartButton {
         newOrder.makeOrder(user, book);
         this.order = newOrder;
         //Adding the order to the listOrder
-        orderList.addOrders(newOrder);
+        orderList.addOrders(newOrder, addToCartButtonObj);
         //adding quantity to the order
         this.addCartTotal();
         //Then, we keep showing the information
         this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
+        //Setting total and subtotal of the orders
+        displayCart.setSubTotal();
+        displayCart.setTotal();
+        //checking if there are orders left
+        displayCart.showCartContent();
     }
     addCartTotal() {
         let cartNumberContainer = document.querySelector('.cart-number-container');
@@ -80,12 +93,14 @@ class AddToCartButton {
             this.order.quantity = 1;
             /* console.log(`Total book in purchse: ${book.totalBookInPurchase}`); */
             this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
+            this.cartFragment.updateQuantity();
         }
     }
     removeBook(book) {
         if (this.order.quantity > 0) {
             this.order.quantity = -1;
             this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
+            this.cartFragment.updateQuantity();
         }
         if (this.order.quantity === 0) {
             this.plusIcon.classList.add('hide');
@@ -94,6 +109,9 @@ class AddToCartButton {
             this.subsCartTotal();
             //remove element from orderList
             orderList.removeOrders(this.order);
+            this.cartFragment.deleteFragment();
+            //check if there are orders left
+            displayCart.showCartContent();
         }
     }
 }

@@ -1,19 +1,19 @@
 import { Book } from "src/Book/Book.js"
 import { orderList } from "../../Orderlist/Orderlist.js"
 import { Order } from "../../Order/Order.js"
+import { CartFragment } from "./cartFragment.js"
+import { AddToCartButton } from "../ShowBookInfo/AddToCartButton.js"
 
 class DisplayCart {
   cartContainer = document.querySelector('.cart-container') as HTMLElement
   cartPurchaseContainer = document.querySelector('.cart-purchases-container') as HTMLElement
   xButton = document.querySelector('.x-button') as HTMLElement
+  subTotal = document.querySelector('.sub-total') as HTMLElement
+  total = document.querySelector('.total') as HTMLElement
 
   constructor(
-    private _deleteButtonsArr: HTMLElement[] = []
-  ) {
-  }
 
-  public set deleteButtonsArr(arr: HTMLElement[]) {
-    this._deleteButtonsArr = arr
+  ) {
   }
 
   clickCart() {
@@ -28,6 +28,19 @@ class DisplayCart {
     this.xButton?.addEventListener('click', () => {
       this.cartPurchaseContainer.classList.add('hide')
     })
+  }
+
+  public setSubTotal() {
+    //update the total value of the orderList class
+    orderList.getTotalOrders()
+    this.subTotal.innerHTML = orderList.totalOrderList.toLocaleString()
+  }
+
+  public setTotal() {
+    //update the total value of the orderList class
+    orderList.getTotalOrders()
+    this.total.innerHTML = orderList.totalOrderList.toLocaleString()
+
   }
 
   showCartContent() {
@@ -48,8 +61,7 @@ class DisplayCart {
     }
   }
 
-  showBooksOrder(order: Order) {
-    console.log('Order quantity', order.quantity);
+  showBooksOrder(order: Order, addToCartButton: AddToCartButton) {
 
     const productsInfoContainer = document.querySelector('.products-info') as HTMLElement
 
@@ -98,36 +110,30 @@ class DisplayCart {
   </div>
     `
 
+    let quantityText, plusIcon, subsIcon, bookTotal
+
     while(tempContainer.firstChild) {
       fragment.appendChild(tempContainer.firstChild)
+
+      quantityText = fragment.querySelector('.total-book-in-purchase')
+      plusIcon = fragment.querySelector('.add-book-button')
+      subsIcon = fragment.querySelector('.subs-book-button')
+      bookTotal = fragment.querySelector('.book-total span')
     }
 
+
     productsInfoContainer.appendChild(fragment)
-    this.deleteFunction(fragmentId, order)
+
+    const newCartFragment = new CartFragment(fragmentId, quantityText, plusIcon, subsIcon, order, addToCartButton, bookTotal)
+    newCartFragment.deleteFunction()
+    newCartFragment.plusIconFunction()
+    newCartFragment.subsIconFunction()
+
+    //connect the addToCartButton with the CartFragment class
+    addToCartButton.cartFragment = newCartFragment
   }
 
 
-  public deleteFunction(fragmentId: string, order: Order) {
-
-    // Add event listener to the delete button
-    const deleteBtn = document.querySelector(`#${fragmentId} .delete-book-button`) as HTMLElement
-    deleteBtn.addEventListener('click', () => {
-      // Find the product-info container element using the unique identifier
-      const productInfoContainer = document.querySelector(`#${fragmentId}`) as HTMLElement
-      if (productInfoContainer) {
-        // Find the book-quantity element inside the product-info container and remove it
-        const bookQuantityContainer = productInfoContainer.querySelector('.book-quantity') as HTMLElement
-        if (bookQuantityContainer) {
-          bookQuantityContainer.remove()
-        }
-      // Remove the product-info container element from the DOM
-      productInfoContainer.remove()
-      }
-      //setting order.quantity to 0 since we deleted the order
-      order.resetQuantity()
-  })
-
-  }
 }
 
 let displayCart = new DisplayCart()

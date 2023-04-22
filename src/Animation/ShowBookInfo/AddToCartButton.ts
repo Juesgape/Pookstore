@@ -2,28 +2,40 @@ import { orderList } from "../../Orderlist/Orderlist.js";
 import { Book } from "../../Book/Book.js";
 import { Order } from "../../Order/Order.js";
 import { user } from "../../selectFav.js";
+import { displayCart } from "../Cart/displayCart.js";
+import { CartFragment } from "../Cart/cartFragment.js";
 
 class AddToCartButton {
   //This will be the order per book
   private _order: Object = {}
+  private _cartFragment!: CartFragment
   constructor(
     private deleteIcon: HTMLElement,
     private plusIcon: HTMLElement,
     private book: Book,
     private addToCart: HTMLElement
 
+
   ) {
+  }
+
+  set cartFragment(obj: CartFragment) {
+    this._cartFragment = obj
   }
 
   set order(newOrder: any) {
     this._order = newOrder
   }
 
+  get cartFragment(): CartFragment {
+    return this._cartFragment
+  }
+
   get order() {
     return this._order
   }
 
-  public showIcons(book: Book) {
+  public showIcons(book: Book, addToCartButtonObj: AddToCartButton) {
 
     if(book.stock === 0) {
       this.addToCart.style.color = 'red'
@@ -45,13 +57,20 @@ class AddToCartButton {
     newOrder.makeOrder(user, book)
     this.order = newOrder
     //Adding the order to the listOrder
-    orderList.addOrders(newOrder)
+    orderList.addOrders(newOrder, addToCartButtonObj)
 
     //adding quantity to the order
     this.addCartTotal()
 
     //Then, we keep showing the information
     this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`
+
+    //Setting total and subtotal of the orders
+    displayCart.setSubTotal()
+    displayCart.setTotal()
+
+    //checking if there are orders left
+    displayCart.showCartContent()
 
   }
 
@@ -102,8 +121,8 @@ class AddToCartButton {
     if(this.order.quantity < book.stock) {
       this.order.quantity = 1;
       /* console.log(`Total book in purchse: ${book.totalBookInPurchase}`); */
-
       this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`
+      this.cartFragment.updateQuantity()
     }
   }
 
@@ -112,9 +131,10 @@ class AddToCartButton {
     if(this.order.quantity > 0) {
       this.order.quantity = -1;
       this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
+      this.cartFragment.updateQuantity()
     }
 
-    if (this.order.quantity === 0) {
+    if(this.order.quantity === 0) {
       this.plusIcon.classList.add('hide');
       this.deleteIcon.classList.add('hide');
       this.addToCart.innerHTML = 'Add to Cart';
@@ -122,6 +142,10 @@ class AddToCartButton {
 
       //remove element from orderList
       orderList.removeOrders(this.order)
+      this.cartFragment.deleteFragment()
+
+      //check if there are orders left
+      displayCart.showCartContent()
     }
 
   }

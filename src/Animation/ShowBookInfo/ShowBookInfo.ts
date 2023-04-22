@@ -117,7 +117,7 @@ class ShowBookInfo {
         })
 
         addToCart.addEventListener('click', () => {
-          addToCartButton.showIcons(book)
+          addToCartButton.showIcons(book, addToCartButton)
         })
       })
     }

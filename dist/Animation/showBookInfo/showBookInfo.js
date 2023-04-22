@@ -90,7 +90,7 @@ class ShowBookInfo {
                 addToCartButton.removeBook(book);
             });
             addToCart.addEventListener('click', () => {
-                addToCartButton.showIcons(book);
+                addToCartButton.showIcons(book, addToCartButton);
             });
         });
     }

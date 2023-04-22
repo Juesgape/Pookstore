@@ -1,6 +1,7 @@
 import { Book } from "src/Book/Book"
 import {Order} from "../Order/Order"
 import { displayCart } from "../Animation/Cart/displayCart.js"
+import { AddToCartButton } from "src/Animation/ShowBookInfo/AddToCartButton"
 
 class Orderlist{
     constructor(
@@ -12,11 +13,19 @@ class Orderlist{
       return this._orders
     }
 
-    public addOrders(order: Order) {
+    get totalOrderList() {
+      return this._totalOrderList
+    }
+
+    set totalOrderList(value: number) {
+      this._totalOrderList = value
+    }
+
+    public addOrders(order: Order, addToCartButton: AddToCartButton) {
       this._orders.push(order)
       //Show Book order in the cart interface
-      displayCart.showBooksOrder(order)
-      console.log(this.orders)
+      displayCart.showBooksOrder(order, addToCartButton)
+      /* console.log(addToCartButton) */
     }
 
     public removeOrders(order: Order) {
@@ -31,9 +40,18 @@ class Orderlist{
 
     }
 
+    public getTotalOrders() {
+      let newValue = 0
+      this.orders.forEach(e => {
+        newValue += e.quantity * e.book.price
+      })
+      this.totalOrderList = newValue
+    }
+
     public resetProducts(){
 
     }
+
     public sellProducts(){
 
     }

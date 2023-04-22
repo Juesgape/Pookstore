@@ -7,6 +7,7 @@
   right: 0;
   z-index: 1;
   background-color: white;
+  transition: .3s ease-in-out;
 }
 
 .x-button-container {

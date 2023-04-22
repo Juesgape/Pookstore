@@ -9,11 +9,17 @@ class Orderlist {
     get orders() {
         return this._orders;
     }
-    addOrders(order) {
+    get totalOrderList() {
+        return this._totalOrderList;
+    }
+    set totalOrderList(value) {
+        this._totalOrderList = value;
+    }
+    addOrders(order, addToCartButton) {
         this._orders.push(order);
         //Show Book order in the cart interface
-        displayCart.showBooksOrder(order);
-        console.log(this.orders);
+        displayCart.showBooksOrder(order, addToCartButton);
+        /* console.log(addToCartButton) */
     }
     removeOrders(order) {
         const index = this._orders.findIndex(item => item === order);
@@ -23,6 +29,13 @@ class Orderlist {
         else {
             console.error('The element does not exist');
         }
+    }
+    getTotalOrders() {
+        let newValue = 0;
+        this.orders.forEach(e => {
+            newValue += e.quantity * e.book.price;
+        });
+        this.totalOrderList = newValue;
     }
     resetProducts() {
     }
