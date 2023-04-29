@@ -1,6 +1,6 @@
 import { Book } from "src/Book/Book.js"
 import { orderList } from "../../Orderlist/Orderlist.js"
-import { Order } from "../../Order/Order.js"
+import { Order, order } from "../../Order/Order.js"
 import { CartFragment } from "./cartFragment.js"
 import { AddToCartButton } from "../ShowBookInfo/AddToCartButton.js"
 
@@ -10,6 +10,7 @@ class DisplayCart {
   xButton = document.querySelector('.x-button') as HTMLElement
   subTotal = document.querySelector('.sub-total') as HTMLElement
   total = document.querySelector('.total') as HTMLElement
+  buyButton = document.querySelector('.buy-button-container button') as HTMLElement
 
   constructor(
 
@@ -17,7 +18,7 @@ class DisplayCart {
   }
 
   clickCart() {
-    this.cartContainer?.addEventListener('click', () => {
+    this.cartContainer.addEventListener('click', () => {
       this.cartPurchaseContainer.classList.remove('hide')
       this.clickXbtn()
       this.showCartContent()
@@ -25,8 +26,19 @@ class DisplayCart {
   }
 
   clickXbtn() {
-    this.xButton?.addEventListener('click', () => {
+    this.xButton.addEventListener('click', () => {
       this.cartPurchaseContainer.classList.add('hide')
+    })
+  }
+
+  click_X_btn_automatically() {
+    this.cartPurchaseContainer.classList.add('hide')
+  }
+
+  clickBuyButton() {
+    this.buyButton.addEventListener('click', () => {
+      orderList.sellProducts()
+      this.click_X_btn_automatically()
     })
   }
 
@@ -139,6 +151,7 @@ class DisplayCart {
 let displayCart = new DisplayCart()
 
 displayCart.clickCart()
+displayCart.clickBuyButton()
 
 export {
   displayCart

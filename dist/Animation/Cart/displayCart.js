@@ -6,18 +6,28 @@ class DisplayCart {
     xButton = document.querySelector('.x-button');
     subTotal = document.querySelector('.sub-total');
     total = document.querySelector('.total');
+    buyButton = document.querySelector('.buy-button-container button');
     constructor() {
     }
     clickCart() {
-        this.cartContainer?.addEventListener('click', () => {
+        this.cartContainer.addEventListener('click', () => {
             this.cartPurchaseContainer.classList.remove('hide');
             this.clickXbtn();
             this.showCartContent();
         });
     }
     clickXbtn() {
-        this.xButton?.addEventListener('click', () => {
+        this.xButton.addEventListener('click', () => {
             this.cartPurchaseContainer.classList.add('hide');
+        });
+    }
+    click_X_btn_automatically() {
+        this.cartPurchaseContainer.classList.add('hide');
+    }
+    clickBuyButton() {
+        this.buyButton.addEventListener('click', () => {
+            orderList.sellProducts();
+            this.click_X_btn_automatically();
         });
     }
     setSubTotal() {
@@ -107,4 +117,5 @@ class DisplayCart {
 }
 let displayCart = new DisplayCart();
 displayCart.clickCart();
+displayCart.clickBuyButton();
 export { displayCart };

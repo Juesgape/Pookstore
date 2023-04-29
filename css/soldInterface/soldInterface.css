@@ -1,0 +1,142 @@
+.main-receipt-container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.company-info img {
+  width: 60px;
+  padding-bottom: 1rem;
+}
+
+/* Add some spacing between elements */
+p, span {
+  margin-bottom: 0.5rem;
+}
+
+/* Style the company name */
+.company-name h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Style the buyer name */
+.buyer {
+  color: #FF7F50;
+}
+
+/* Style the date */
+.date-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.date {
+  font-weight: bold;
+}
+
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+/* Style the product quantity */
+.product-quantity {
+  width: 50px;
+}
+
+.quantity {
+  font-weight: bold;
+}
+
+.receipt-book-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.receipt-author {
+  font-style: italic;
+}
+
+/* Style the product total */
+.receipt-product-total {
+  width: 70px;
+}
+
+.total-product {
+  font-weight: bold;
+}
+
+/* Style the receipt ID */
+.receipt-id {
+  font-weight: bold;
+  color: #FF7F50;
+}
+
+/* Style the total */
+.total-purchase {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* Add some spacing to the top of the receipt */
+.main-receipt-container {
+  padding-top: 2rem;
+}
+
+/* Style the border of the receipt */
+.receipt-products-container {
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+/* Add some margin to the bottom of the receipt */
+.receipt-total-container {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.receipt-id-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.total-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+}
+
+.sold-info-container {
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+
+.sold-info iframe {
+  width: 100%;
+  height: 100vh;
+}
+
+.receipt-back-button {
+  padding-right: 1rem;
+}
+
+.receipt-back-button button {
+  width: 350px;
+  background-color: #FF7F50;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  color: white;
+}

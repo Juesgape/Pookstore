@@ -83,6 +83,7 @@ class ShowBookInfo {
                 this.moreInfoEvent(book);
             });
             let addToCartButton = new AddToCartButton(deleteIcon, plusIcon, book, addToCart);
+            book.cartButton = addToCartButton;
             plusIcon.addEventListener('click', () => {
                 addToCartButton.addMoreBooks(book);
             });

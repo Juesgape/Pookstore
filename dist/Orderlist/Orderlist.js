@@ -1,4 +1,6 @@
 import { displayCart } from "../Animation/Cart/displayCart.js";
+import { Receipt } from "../Animation/Receipt/receiptInterface.js";
+import { user } from '../selectFav.js';
 class Orderlist {
     _orders;
     _totalOrderList;
@@ -14,6 +16,9 @@ class Orderlist {
     }
     set totalOrderList(value) {
         this._totalOrderList = value;
+    }
+    set orders(emptyArr) {
+        this._orders = emptyArr;
     }
     addOrders(order, addToCartButton) {
         this._orders.push(order);
@@ -36,10 +41,25 @@ class Orderlist {
             newValue += e.quantity * e.book.price;
         });
         this.totalOrderList = newValue;
+        return this.totalOrderList;
     }
     resetProducts() {
+        this.orders.forEach(e => {
+            e.book.stock = e.quantity;
+            e.book.cartButton.resetButton();
+        });
+        this.orders = [];
     }
     sellProducts() {
+        //When this quantity is 0, the interface will hide the buy button, however, we do this for security lol
+        let header = window.parent.document.querySelector('header');
+        let recieptInfo = document.querySelector('.sold-info-container');
+        recieptInfo.classList.remove('hide');
+        header.classList.add('hide');
+        //Creating new Receipt
+        let newReciept = new Receipt(user.userName, new Date(), Math.random().toString());
+        newReciept.showProducts();
+        this.resetProducts();
     }
 }
 let orderList = new Orderlist([], 0);

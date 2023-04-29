@@ -15,7 +15,6 @@ class AddToCartButton {
     private book: Book,
     private addToCart: HTMLElement
 
-
   ) {
   }
 
@@ -128,6 +127,8 @@ class AddToCartButton {
 
   public removeBook(book: Book) {
 
+    console.log(this.order)
+
     if(this.order.quantity > 0) {
       this.order.quantity = -1;
       this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;
@@ -147,8 +148,20 @@ class AddToCartButton {
       //check if there are orders left
       displayCart.showCartContent()
     }
-
   }
+
+  public resetButton() {
+    this.plusIcon.classList.add('hide');
+      this.deleteIcon.classList.add('hide');
+      this.addToCart.innerHTML = 'Add to Cart';
+      this.subsCartTotal()
+
+      this.cartFragment.deleteFragment()
+
+      //check if there are orders left
+      displayCart.showCartContent()
+  }
+
 }
 
 export {

@@ -107,7 +107,7 @@ class ShowBookInfo {
         })
 
         let addToCartButton = new AddToCartButton(deleteIcon, plusIcon, book, addToCart)
-
+        book.cartButton = addToCartButton
         plusIcon.addEventListener('click', () => {
           addToCartButton.addMoreBooks(book)
         })

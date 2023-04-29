@@ -2,6 +2,8 @@ import { Book } from "src/Book/Book"
 import {Order} from "../Order/Order"
 import { displayCart } from "../Animation/Cart/displayCart.js"
 import { AddToCartButton } from "src/Animation/ShowBookInfo/AddToCartButton"
+import { Receipt } from "../Animation/Receipt/receiptInterface.js"
+import {user} from '../selectFav.js'
 
 class Orderlist{
     constructor(
@@ -19,6 +21,10 @@ class Orderlist{
 
     set totalOrderList(value: number) {
       this._totalOrderList = value
+    }
+
+    set orders(emptyArr:[]) {
+      this._orders = emptyArr
     }
 
     public addOrders(order: Order, addToCartButton: AddToCartButton) {
@@ -46,14 +52,32 @@ class Orderlist{
         newValue += e.quantity * e.book.price
       })
       this.totalOrderList = newValue
+      return this.totalOrderList
     }
 
     public resetProducts(){
 
+      this.orders.forEach(e => {
+        e.book.stock = e.quantity
+        e.book.cartButton.resetButton()
+      })
+      this.orders = []
     }
 
-    public sellProducts(){
+    public sellProducts() {
+      //When this quantity is 0, the interface will hide the buy button, however, we do this for security lol
 
+      let header = window.parent.document.querySelector('header') as HTMLElement
+      let recieptInfo = document.querySelector('.sold-info-container') as HTMLElement
+
+      recieptInfo.classList.remove('hide')
+      header.classList.add('hide')
+
+      //Creating new Receipt
+      let newReciept = new Receipt(user.userName, new Date(), Math.random().toString())
+      newReciept.showProducts()
+
+      this.resetProducts()
     }
 }
 
