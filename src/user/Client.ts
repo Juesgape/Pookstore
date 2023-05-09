@@ -1,3 +1,4 @@
+import { json } from "express"
 import {User} from "./User.js"
 
 class Client extends User{
@@ -14,6 +15,7 @@ class Client extends User{
   }
   public set setLikes(value: string[]) {
     this._likes = value
+    localStorage.setItem('userLikes', this.getUserLikes)
   }
 }
 

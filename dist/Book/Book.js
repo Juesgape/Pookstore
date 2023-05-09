@@ -8,10 +8,9 @@ class Book {
     _price;
     _supplier;
     _stock;
-    _cartButton;
-    constructor(_id, _title, _author, _description, _img, _genre, _price, _supplier, _stock, 
     //saving the addToCartButton that belongs to the book
-    _cartButton) {
+    _cartButton;
+    constructor(_id, _title, _author, _description, _img, _genre, _price, _supplier, _stock) {
         this._id = _id;
         this._title = _title;
         this._author = _author;
@@ -21,7 +20,6 @@ class Book {
         this._price = _price;
         this._supplier = _supplier;
         this._stock = _stock;
-        this._cartButton = _cartButton;
     }
     get id() {
         return this._id;

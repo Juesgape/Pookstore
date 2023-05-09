@@ -49,17 +49,24 @@ class Orderlist{
     public getTotalOrders() {
       let newValue = 0
       this.orders.forEach(e => {
-        newValue += e.quantity * e.book.price
+        newValue += e['quantity'] * e['book']['price']
       })
       this.totalOrderList = newValue
       return this.totalOrderList
     }
 
     public resetProducts(){
+      /* this.orders.forEach(order => {
+        const resettingNumber = -order.quantity
+        order.quantity = resettingNumber
+      }) */
 
       this.orders.forEach(e => {
-        e.book.stock = e.quantity
-        e.book.cartButton.resetButton()
+        //updating orderQuantity
+       /*  e.quantity = -(e.quantity) */
+        //updating book stock and button
+        e['book']['stock'] = e['quantity']
+        e['book']['cartButton']['resetButton']()
       })
       this.orders = []
     }

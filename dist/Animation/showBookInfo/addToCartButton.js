@@ -97,7 +97,6 @@ class AddToCartButton {
         }
     }
     removeBook(book) {
-        console.log(this.order);
         if (this.order.quantity > 0) {
             this.order.quantity = -1;
             this.addToCart.innerHTML = `${this.order.quantity}/${book.stock}`;

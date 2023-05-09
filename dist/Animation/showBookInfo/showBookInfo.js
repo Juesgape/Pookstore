@@ -10,6 +10,7 @@ class ShowBookInfo {
         let mainContainer = document.querySelector('.main-container');
         let header = window.parent.document.querySelector('header');
         header.classList.add('blur');
+        header.classList.add('hide');
         mainContainer.classList.add('blur');
         //displaying the bookInformation
         this.displayBookInfo(book);
@@ -35,6 +36,7 @@ class ShowBookInfo {
             let mainContainer = window.parent.document.querySelector('.main-container');
             let header = window.parent.document.querySelector('header');
             header.classList.remove('blur');
+            header.classList.remove('hide');
             mainContainer.classList.remove('blur');
         });
     }

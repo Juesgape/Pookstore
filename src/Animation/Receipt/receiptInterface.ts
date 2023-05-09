@@ -64,16 +64,16 @@ class Receipt {
       element.innerHTML = `
       <div class="product">
         <div class="product-quantity">
-          <p><span class="quantity">${e.quantity}</span>x</p>
+          <p><span class="quantity">${e['quantity']}</span>x</p>
         </div>
 
         <div class="receipt-product-info">
-          <p class="receipt-book-title">${e.book.title}</p>
-          <span class="receipt-author">${e.book.author}</span>
+          <p class="receipt-book-title">${e['book']['title']}</p>
+          <span class="receipt-author">${e['book']['author']}</span>
         </div>
 
         <div class="receipt-product-total">
-          <p>$<span class="total-product">${(e.quantity * e.book.price).toLocaleString()}</span></p>
+          <p>$<span class="total-product">${(e['quantity'] * e['book']['price']).toLocaleString()}</span></p>
         </div>
     </div>
     `

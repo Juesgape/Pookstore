@@ -42,7 +42,6 @@ class AddToCartButton {
       this.addToCart.innerHTML = 'Sold Out'
       return
     }
-
     /* console.log(orderList.orders)
     console.log(book.totalBookInPurchase); */
 
@@ -126,8 +125,6 @@ class AddToCartButton {
   }
 
   public removeBook(book: Book) {
-
-    console.log(this.order)
 
     if(this.order.quantity > 0) {
       this.order.quantity = -1;

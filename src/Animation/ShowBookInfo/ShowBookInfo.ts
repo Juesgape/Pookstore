@@ -16,6 +16,7 @@ class ShowBookInfo {
     let mainContainer = document.querySelector('.main-container') as HTMLElement
     let header = window.parent.document.querySelector('header') as HTMLElement
     header.classList.add('blur')
+    header.classList.add('hide')
     mainContainer.classList.add('blur')
 
     //displaying the bookInformation
@@ -49,6 +50,7 @@ class ShowBookInfo {
       let mainContainer = window.parent.document.querySelector('.main-container') as HTMLElement
       let header = window.parent.document.querySelector('header') as HTMLElement
       header.classList.remove('blur')
+      header.classList.remove('hide')
       mainContainer.classList.remove('blur')
     })
   }

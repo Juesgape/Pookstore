@@ -1,6 +1,8 @@
 import { AddToCartButton } from "src/Animation/ShowBookInfo/AddToCartButton"
 
 class Book{
+   //saving the addToCartButton that belongs to the book
+    private _cartButton!: AddToCartButton
     constructor(
     private _id: string,
     private _title: string,
@@ -11,8 +13,6 @@ class Book{
     private _price: number,
     private _supplier: string,
     private _stock: number,
-    //saving the addToCartButton that belongs to the book
-    private _cartButton: AddToCartButton
     ){}
 
     get id() {

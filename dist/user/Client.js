@@ -12,6 +12,7 @@ class Client extends User {
     }
     set setLikes(value) {
         this._likes = value;
+        localStorage.setItem('userLikes', this.getUserLikes);
     }
 }
 export { Client };

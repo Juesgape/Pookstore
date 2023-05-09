@@ -10,6 +10,15 @@ userName.innerHTML = userNameDisplay;
 const likesContainer = document.querySelector('.likes-container');
 const buttonsLikes = Array.from(document.querySelectorAll('.btn'));
 const sendLikesBtn = document.querySelector('#send-likes-btn');
+//Check if the user exists
+let localStorageLikes = localStorage.getItem('userLikes');
+if (localStorageLikes) {
+    const separateLikes = localStorageLikes.split(',');
+    user.setLikes = separateLikes;
+    likesContainer?.classList.add('hide');
+    let getBooks = new GetBooks();
+    getBooks.getData();
+}
 //how many books have they reacted to?
 let elementsSelected = [];
 buttonsLikes.forEach(button => {
@@ -43,6 +52,7 @@ sendLikesBtn?.addEventListener('click', async () => {
         console.warn('You must select at least more than 2 books');
     }
     else {
+        //Saving users likes in the Client class and  (see Client.ts)
         user.setLikes = elementsSelected;
         likesContainer?.classList.add('hide');
         let getBooks = new GetBooks();
