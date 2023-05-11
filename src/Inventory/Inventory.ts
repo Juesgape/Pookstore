@@ -15,7 +15,7 @@ type Receipt = {
 class Inventory{
     private _totalbooks:number = 0
     private _books: Book[]=[]
-    private _soldbooksRegister:Receipt[]=[]
+    private _soldBooksRegister:Receipt[]=[]
 
     //GETTERS
     public get totalbooks():number {
@@ -24,6 +24,10 @@ class Inventory{
 
     public get books(): Book[]{
         return this._books
+    }
+
+    public get soldBooksRegister():Receipt[]{
+      return this._soldBooksRegister;
     }
 
     //SETTERS
@@ -39,12 +43,11 @@ class Inventory{
       this.setTotalBooks = this._books.length
     }
 
-    public get_soldbooksRegister():void{
-        for(let i:number=0;i < this._soldbooksRegister.length;i++){
-            console.log(this._soldbooksRegister[i]);
-
-        }
+    public set soldBooksRegister(newReceipt: Receipt) {
+      this._soldBooksRegister.push(newReceipt)
     }
+
+
     //METHODS
     public updateTotalBooks(new_books:[]):void{
         this._totalbooks+=new_books.length //El numero de libros aumentará segun la cantidad de libros que se ingresan en el array
