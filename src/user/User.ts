@@ -6,7 +6,7 @@ class User {
     ) {
 
   }
-  getUserInfo() {
+  getUserInfo():void {
     console.log(`Email: ${this.email}, Username: ${this.userName}, Type: ${this.type}`)
   }
 }

@@ -11,6 +11,7 @@ class LocalData {
     if(info !== null) {
       infoObj = JSON.parse(info)
     } else {
+      window.location.href = '.././interface/login.html'
       throw new Error('El usuario no está registrado')
     }
 

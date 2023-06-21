@@ -1,13 +1,16 @@
 class Inventory {
     _totalbooks = 0;
     _books = [];
-    _soldbooksRegister = [];
+    _soldBooksRegister = [];
     //GETTERS
     get totalbooks() {
         return this._totalbooks;
     }
     get books() {
         return this._books;
+    }
+    get soldBooksRegister() {
+        return this._soldBooksRegister;
     }
     //SETTERS
     set setTotalBooks(value) {
@@ -18,10 +21,8 @@ class Inventory {
         //updating the total books in the inventory
         this.setTotalBooks = this._books.length;
     }
-    get_soldbooksRegister() {
-        for (let i = 0; i < this._soldbooksRegister.length; i++) {
-            console.log(this._soldbooksRegister[i]);
-        }
+    set soldBooksRegister(newReceipt) {
+        this._soldBooksRegister.push(newReceipt);
     }
     //METHODS
     updateTotalBooks(new_books) {
