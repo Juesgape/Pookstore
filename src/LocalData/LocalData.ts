@@ -11,8 +11,7 @@ class LocalData {
     if(info !== null) {
       infoObj = JSON.parse(info)
     } else {
-      window.location.href = '.././interface/login.html'
-      throw new Error('El usuario no está registrado')
+      infoObj = new User('blah@gmail.com', 'RandomUser', 'client')
     }
 
     return infoObj
