@@ -6,6 +6,7 @@ const userName = document.querySelector('.userName') as HTMLElement
 
 let localInfo = new LocalData()
 let userData = localInfo.getUser()
+
 export let user = new Client(userData.email, userData.userName, userData.type)
 let userNameDisplay:string = user.getName
 
