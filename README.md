@@ -1,6 +1,6 @@
 # Pookstore
 
-Pookstore is a simulation of an online bookstore in which you can log in, select your favorite book's genres and buy them.
+Pookstore is a simulation of an online bookstore in which you can log in, select your favorite book's genres and buy them. This project was built with Typescript applying the best practices of OOP
 
 - The books were extracted from goodreads using puppeter (web scraping)
 ![image](https://github.com/Juesgape/Pookstore/assets/97264721/dd7fc94f-9c35-48e5-b662-797fd3004e05)
